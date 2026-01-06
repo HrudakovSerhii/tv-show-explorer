@@ -5,13 +5,11 @@ a TV show and its episodes.
 
 ## Details
 ### Show Details Page
-Display information about the TV show “Powerpuff Girls”, including:
+Display information about the TV show, including:
 - Show title
 - Description
 - Cover image
 - List of episodes (each linking to its own episode detail page)
-
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ### Episode Details Page
 When clicking an episode, show:
@@ -74,6 +72,8 @@ You don’t need to do all of these, but they’ll help us understand your level
 - No deployment required, running locally is enough
 
 ## Getting Started
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 First, run the development server:
 
