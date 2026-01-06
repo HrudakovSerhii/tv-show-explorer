@@ -19,6 +19,8 @@ When clicking an episode, show:
 
 Data API: http://www.tvmaze.com/api
 
+Design Reference: Atlassian Design System https://atlassian.design/
+
 ## Core Requirements
 ### Tech Stack
  - Next.js (w/ App Router)
@@ -45,8 +47,7 @@ navigation)
 - Ability to reason about trade-offs and performance
 - Use the Atlassian Design System: Atlassian Design
   
-### Bonus Points (Optional Enhancements)
-You don’t need to do all of these, but they’ll help us understand your level thinking:
+### Optional Enhancements
 
 #### Data & State
 - Implement episode search or pagination
