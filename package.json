@@ -35,5 +35,9 @@
     "tailwindcss": "^4",
     "typescript": "~5.4.0",
     "vitest": "^4.0.16"
+  },
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom"
   }
 }
