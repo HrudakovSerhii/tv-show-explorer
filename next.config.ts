@@ -3,6 +3,11 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
   turbopack: {},
   webpack: (config, { defaultLoaders, isServer }) => {
     config.module.rules.push({
