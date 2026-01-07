@@ -4,15 +4,20 @@ Small web application build with Next.js (App Router) and TypeScript that allows
 a TV show and its episodes.
 
 ## Details
+
 ### Show Details Page
+
 Display information about the TV show, including:
+
 - Show title
 - Description
 - Cover image
 - List of episodes (each linking to its own episode detail page)
 
 ### Episode Details Page
+
 When clicking an episode, show:
+
 - Episode title
 - Summary
 - Cover image
@@ -22,53 +27,61 @@ Data API: http://www.tvmaze.com/api
 Design Reference: Atlassian Design System https://atlassian.design/
 
 ## Core Requirements
+
 ### Tech Stack
- - Next.js (w/ App Router)
- - TypeScript
- - Tailwind CSS (you can use css-in-js if you prefer, but prioritize a zero runtime one)
- - React 18+ features: React Server Components (RSC), Server Actions, etc.
- - Data fetching: Prefer Next.js server functions or TanStack Query where appropriate
- - Testing: Vitest + Testing Library for unit and component tests
- - Code quality tools: ESLint + Prettier configuration and usage
+
+- Next.js (w/ App Router)
+- TypeScript
+- Tailwind CSS (you can use css-in-js if you prefer, but prioritize a zero runtime one)
+- React 18+ features: React Server Components (RSC), Server Actions, etc.
+- Data fetching: Prefer Next.js server functions or TanStack Query where appropriate
+- Testing: Vitest + Testing Library for unit and component tests
+- Code quality tools: ESLint + Prettier configuration and usage
 
 ### Expected
- - Fetch and render data on the server side when possible
- - Use server actions for non-trivial operations
- - Make it accessible (ARIA attributes, keyboard navigation, screen reader-friendly)
- - The layout must be responsive
+
+- Fetch and render data on the server side when possible
+- Use server actions for non-trivial operations
+- Make it accessible (ARIA attributes, keyboard navigation, screen reader-friendly)
+- The layout must be responsive
 
 ### Evaluation points:
+
 - Ability to decide when to use client vs server components
 - Understanding of data fetching strategies (SSR, SSG, RSC, caching)
 - Proper TypeScript types and narrowing
 - Clean, self-documenting code and meaningful commit history
 - Awareness of accessibility best practices (including screen reader support and keyboard
-navigation)
+  navigation)
 - Ability to reason about trade-offs and performance
 - Use the Atlassian Design System: Atlassian Design
-  
+
 ### Optional Enhancements
 
 #### Data & State
+
 - Implement episode search or pagination
 - Allow users to favorite episodes (using a Server Action or a local DB mock via JSON file or in-
   memory data)
 
 #### Testing
+
 - Write unit and component tests with Vitest + React Testing Library
 - Include coverage for core logic and at least one async flow
 
 #### Accessibility
+
 - Test the app with a screen reader (or Lighthouse accessibility audit)
 - Implement keyboard navigation and ensure the app is fully navigable via keyboard
 - Show intentional use of aria-labels, roles, and semantic HTML
 
 ### Deliverables
+
 - A public GitHub repository
 - Include a short README explaining:
-   - Architecture decisions
-   - Key trade-offs
-   - What you would improve with more time
+  - Architecture decisions
+  - Key trade-offs
+  - What you would improve with more time
 - Basic setup instructions (npm install && npm run dev)
 - No deployment required, running locally is enough
 

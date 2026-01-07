@@ -10,10 +10,7 @@ function DefaultWrapper({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
 
-export function render(
-  ui: ReactElement,
-  options?: CustomRenderOptions
-) {
+export function render(ui: ReactElement, options?: CustomRenderOptions) {
   const Wrapper = options?.wrapper || DefaultWrapper;
 
   return rtlRender(ui, {
