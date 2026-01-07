@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "coverage/**",
   ]),
   {
     plugins: {
@@ -20,6 +21,13 @@ const eslintConfig = defineConfig([
     },
     rules: {
       ...atlaskitPlugin.configs.recommended.rules,
+    },
+  },
+  {
+    files: ["**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}", "vitest.setup.tsx", "src/test-utils.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "react/display-name": "off",
     },
   },
 ]);
