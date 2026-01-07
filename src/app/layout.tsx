@@ -2,7 +2,6 @@ import React from 'react';
 
 import { AtlaskitThemeProvider } from '@/components/providers/AtlaskitThemeProvider';
 
-import '@atlaskit/css-reset';
 import './globals.css';
 
 import type { Metadata } from 'next';
