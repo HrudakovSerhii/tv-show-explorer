@@ -70,7 +70,7 @@ describe('TVMaze API Client', () => {
 
       expect(result).toEqual([]);
       expect(consoleErrorSpy).toHaveBeenCalledWith(
-        'Search failed with status: 500'
+        'Search failed: Search failed with status: 500'
       );
 
       consoleErrorSpy.mockRestore();
@@ -87,8 +87,7 @@ describe('TVMaze API Client', () => {
 
       expect(result).toEqual([]);
       expect(consoleErrorSpy).toHaveBeenCalledWith(
-        'Search failed:',
-        expect.any(Error)
+        'Search failed: Network error'
       );
 
       consoleErrorSpy.mockRestore();
@@ -168,8 +167,7 @@ describe('TVMaze API Client', () => {
 
       expect(result).toBeNull();
       expect(consoleErrorSpy).toHaveBeenCalledWith(
-        'Fetching show details failed:',
-        expect.any(Error)
+        'Fetching show details failed: Failed to fetch show details: 500'
       );
 
       consoleErrorSpy.mockRestore();
@@ -186,8 +184,7 @@ describe('TVMaze API Client', () => {
 
       expect(result).toBeNull();
       expect(consoleErrorSpy).toHaveBeenCalledWith(
-        'Fetching show details failed:',
-        expect.any(Error)
+        'Fetching show details failed: Network error'
       );
 
       consoleErrorSpy.mockRestore();
@@ -264,8 +261,7 @@ describe('TVMaze API Client', () => {
 
       expect(result).toBeNull();
       expect(consoleErrorSpy).toHaveBeenCalledWith(
-        'Fetching episode details failed:',
-        expect.any(Error)
+        'Fetching episode details failed: Failed to fetch episode details: 500'
       );
 
       consoleErrorSpy.mockRestore();
@@ -282,8 +278,7 @@ describe('TVMaze API Client', () => {
 
       expect(result).toBeNull();
       expect(consoleErrorSpy).toHaveBeenCalledWith(
-        'Fetching episode details failed:',
-        expect.any(Error)
+        'Fetching episode details failed: Network error'
       );
 
       consoleErrorSpy.mockRestore();
