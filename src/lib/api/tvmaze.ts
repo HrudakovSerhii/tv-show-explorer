@@ -1,5 +1,7 @@
 import { cacheLife } from 'next/cache';
 
+import { formatErrorMessage, createApiStatusError } from './error-utils';
+
 import type { Show, Episode } from '@/types/api-types';
 
 const BASE_URL = 'https://api.tvmaze.com';
@@ -12,13 +14,13 @@ export async function searchShows(query: string): Promise<Show[]> {
     const response = await fetch(`${BASE_URL}/search/shows?q=${encodeURIComponent(query)}`);
 
     if (!response.ok) {
-      throw new Error(`Search failed with status: ${response.status}`);
+      throw createApiStatusError('Search failed with status', response.status);
     }
 
     const data = await response.json();
     return data.map((item: { show: Show }) => item.show);
   } catch (error) {
-    console.error('Search failed:', error);
+    console.error(formatErrorMessage('Search failed:', error));
     return [];
   }
 }
@@ -34,12 +36,12 @@ export async function getShowDetails(id: string | number): Promise<Show | null> 
       if (response.status === 404) {
         return null;
       }
-      throw new Error(`Failed to fetch show details: ${response.status}`);
+      throw createApiStatusError('Failed to fetch show details', response.status);
     }
 
     return await response.json();
   } catch (error) {
-    console.error('Fetching show details failed:', error);
+    console.error(formatErrorMessage('Fetching show details failed:', error));
     return null;
   }
 }
@@ -55,12 +57,12 @@ export async function getEpisodeDetails(id: string | number): Promise<Episode | 
       if (response.status === 404) {
         return null;
       }
-      throw new Error(`Failed to fetch episode details: ${response.status}`);
+      throw createApiStatusError('Failed to fetch episode details', response.status);
     }
 
     return await response.json();
   } catch (error) {
-    console.error('Fetching episode details failed:', error);
+    console.error(formatErrorMessage('Fetching episode details failed:', error));
     return null;
   }
 }
