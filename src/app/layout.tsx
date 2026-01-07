@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { AtlaskitThemeProvider } from '@/components/providers/AtlaskitThemeProvider';
+import Navbar from '@/components/shared/Navbar';
+import Footer from '@/components/shared/Footer';
 
 import './globals.css';
 
@@ -21,7 +23,11 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <AtlaskitThemeProvider />
-        {children}
+        <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+          <Navbar />
+          <main className="flex w-full flex-1 flex-col items-center">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
