@@ -1,0 +1,40 @@
+/* TVMaze Data API types */
+
+export interface CastMember {
+  person: {
+    name: string;
+    image?: { medium: string };
+  };
+  character: {
+    name: string;
+  };
+}
+
+export interface Episode {
+  id: number | string;
+  number: number;
+  season: number;
+  name: string;
+  summary: string;
+  airdate: string;
+  image?: { medium: string; original: string };
+  runtime?: number;
+  rating?: { average: number };
+}
+
+export interface Show {
+  id: number | string;
+  name: string;
+  genres: string[];
+  premiered: string;
+  rating: { average: number | null };
+  image?: { medium: string; original: string };
+  summary: string;
+  status?: string;
+  runtime?: number;
+  officialSite?: string;
+  _embedded?: {
+    episodes?: Episode[];
+    cast?: CastMember[];
+  };
+}
