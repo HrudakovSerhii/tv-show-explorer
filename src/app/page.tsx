@@ -1,9 +1,22 @@
 import Image from 'next/image';
+import Link from 'next/link';
+
+import { token } from '@atlaskit/tokens';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between bg-white px-16 py-32 sm:items-start dark:bg-black">
+    <div
+      style={{
+        color: token('color.background.neutral'),
+      }}
+      className="flex min-h-screen items-center justify-center font-sans"
+    >
+      <main
+        style={{
+          color: token('color.background.neutral'),
+        }}
+        className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between px-16 py-32 sm:items-start"
+      >
         <Image
           className="dark:invert"
           src="/next.svg"
@@ -18,25 +31,25 @@ export default function Home() {
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             Looking for a starting point or more instructions? Head over to{' '}
-            <a
+            <Link
               href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
               className="font-medium text-zinc-950 dark:text-zinc-50"
             >
               Templates
-            </a>{' '}
+            </Link>{' '}
             or the{' '}
-            <a
+            <Link
               href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              className="text-ds-link hover:text-ds-link-pressed font-medium"
             >
               Learning
-            </a>{' '}
+            </Link>{' '}
             center.
           </p>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="bg-foreground text-background flex h-12 w-full items-center justify-center gap-2 rounded-full px-5 transition-colors hover:bg-[#383838] md:w-[158px] dark:hover:bg-[#ccc]"
+          <Link
+            className="bg-ds-background-brand-bold text-ds-text-inverse hover:bg-ds-background-brand-boldest flex h-12 w-full items-center justify-center gap-2 rounded-full px-5 transition-colors md:w-[158px]"
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
@@ -49,15 +62,15 @@ export default function Home() {
               height={16}
             />
             Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
+          </Link>
+          <Link
+            className="border-ds-border hover:bg-ds-background-neutral-hovered flex h-12 w-full items-center justify-center rounded-full border border-solid px-5 transition-colors md:w-[158px]"
             href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
           >
             Documentation
-          </a>
+          </Link>
         </div>
       </main>
     </div>
