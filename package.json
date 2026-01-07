@@ -16,9 +16,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@atlaskit/button": "^23.9.3",
     "@atlaskit/css-reset": "^7.3.10",
-    "@atlaskit/heading": "^5.2.16",
     "@atlaskit/tokens": "^9.1.0",
     "next": "16.1.1",
     "react": "^18.3.1",
