@@ -3,9 +3,27 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  cacheComponents: true,
   logging: {
     fetches: {
       fullUrl: true,
+    },
+  },
+  cacheLife: {
+    search: {
+      stale: 300, // 5 minutes
+      revalidate: 600, // 10 minutes
+      expire: 3600, // 1 hour
+    },
+    show: {
+      stale: 3600, // 1 hour
+      revalidate: 7200, // 2 hours
+      expire: 86400, // 1 day
+    },
+    episode: {
+      stale: 86400, // 1 day
+      revalidate: 172800, // 2 days
+      expire: 604800, // 7 days
     },
   },
   turbopack: {},
