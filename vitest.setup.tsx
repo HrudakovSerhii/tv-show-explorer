@@ -74,3 +74,10 @@ vi.mock('@atlaskit/tokens', async (importOriginal) => {
     setGlobalTheme: vi.fn(() => Promise.resolve()),
   };
 });
+
+vi.mock('next/cache', () => ({
+  cacheLife: vi.fn(),
+  unstable_noStore: vi.fn(),
+  cacheTag: vi.fn(),
+  revalidateTag: vi.fn(),
+}));

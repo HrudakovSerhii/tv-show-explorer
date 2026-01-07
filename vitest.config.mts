@@ -6,14 +6,13 @@ import path from 'path';
 export default defineConfig({
   plugins: [
     react({
-      babel: {
-        configFile: true,
-      },
+      // Don't use babel for vitest - use esbuild instead
+      babel: false,
     }),
   ],
   test: {
     environment: 'jsdom',
-    setupFiles: ['./vitest.setup.mts'],
+    setupFiles: ['./vitest.setup.tsx'],
     include: [
       'src/**/*.{test,spec}.{ts,tsx}',
       '__tests__/**/*.{test,spec}.{ts,tsx}',
