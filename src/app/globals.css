@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -10,6 +10,20 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* === Minimal Atlaskit Design System Tokens === */
+  /* Surface */
+  --color-ds-surface: var(--ds-surface, #ffffff);
+  --color-ds-surface-sunken: var(--ds-surface-sunken, #f8f8f8);
+
+  /* Text */
+  --color-ds-text: var(--ds-text, #292a2e);
+
+  /* Border */
+  --color-ds-border: var(--ds-border, #0b120e24);
+
+  /* Shadows */
+  --shadow-ds-raised: var(--ds-shadow-raised, 0px 1px 1px #1e1f2140, 0px 0px 1px #1e1f214f);
 }
 
 @media (prefers-color-scheme: dark) {
