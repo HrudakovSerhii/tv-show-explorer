@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { searchShows } from '@/lib/api/tvmaze';
@@ -8,25 +9,16 @@ export type SearchPageProps = {
   params: Promise<{ query: string }>;
 };
 
-export default async function SearchPage({ params }: SearchPageProps) {
+async function SearchResults({ params }: { params: Promise<{ query: string }> }) {
   const { query } = await params;
   const decodedQuery = decodeURIComponent(query);
-
   const results = decodedQuery ? await searchShows(decodedQuery) : [];
 
   return (
-    <div className="flex flex-col gap-400">
-      <div className="flex flex-col gap-100">
-        <Link
-          href={NAV_URLS.home}
-          className="text-brand font-weight-medium mb-200 flex items-center gap-50 text-sm hover:underline"
-        >
-          <span className="material-symbols-outlined text-sm">arrow_back</span> Back to Home
-        </Link>
-        <h2 className="text-text dark:text-text-inverse font-weight-bold text-left text-2xl">
-          Search results for &quot;{decodedQuery}&quot;
-        </h2>
-      </div>
+    <>
+      <h2 className="text-text dark:text-text-inverse font-weight-bold text-left text-2xl">
+        Search results for &quot;{decodedQuery}&quot;
+      </h2>
 
       {results.length === 0 && (
         <div className="flex flex-col items-center gap-200 py-1000 text-center">
@@ -48,6 +40,39 @@ export default async function SearchPage({ params }: SearchPageProps) {
           <span key={show.id}>{show.name}</span>
         ))}
       </div>
+    </>
+  );
+}
+
+function SearchLoadingSkeleton() {
+  return (
+    <>
+      <div className="bg-background-neutral-subtle h-8 w-64 animate-pulse rounded-radius-medium" />
+      <div className="grid grid-cols-2 gap-300 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        {Array.from({ length: 10 }).map((_, i) => (
+          <div key={i} className="flex flex-col gap-150">
+            <div className="bg-background-neutral-subtle aspect-[2/3] w-full animate-pulse rounded-radius-large" />
+            <div className="bg-background-neutral-subtle h-4 w-3/4 animate-pulse rounded-radius-small" />
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
+export default function SearchPage({ params }: SearchPageProps) {
+  return (
+    <div className="flex flex-col gap-400">
+      <Link
+        href={NAV_URLS.home}
+        className="text-brand font-weight-medium flex items-center gap-50 text-sm hover:underline"
+      >
+        <span className="material-symbols-outlined text-sm">arrow_back</span> Back to Home
+      </Link>
+
+      <Suspense fallback={<SearchLoadingSkeleton />}>
+        <SearchResults params={params} />
+      </Suspense>
     </div>
   );
 }
