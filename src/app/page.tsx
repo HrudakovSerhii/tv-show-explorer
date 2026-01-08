@@ -11,7 +11,7 @@ export default function Home() {
 
       <section className="flex flex-col gap-200">
         <div className="flex items-center justify-between">
-          <h2 className="text-text dark:text-text-inverse font-weight-bold text-2xl leading-tight tracking-tight">
+          <h2 className="text-text font-weight-bold text-2xl leading-tight tracking-tight">
             Web/Streaming Schedule
           </h2>
           <p className="text-text-subtle text-sm">Today&apos;s releases</p>

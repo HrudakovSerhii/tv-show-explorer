@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { AtlaskitThemeProvider } from '@/components/providers/AtlaskitThemeProvider';
+import { ThemeProvider } from '@/contexts/ThemeContext';
+
 import Navbar from '@/components/shared/Navbar';
 import Footer from '@/components/shared/Footer';
 
@@ -29,14 +30,17 @@ export default function RootLayout({
         <title>TV Show Explorer</title>
       </head>
       <body className="antialiased">
-        <AtlaskitThemeProvider />
-        <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
-          <Navbar />
-          <main className="flex w-full flex-1 flex-col items-center">
-            <div className="mx-auto w-full max-w-[1200px] px-200 py-300 md:px-500">{children}</div>
-          </main>
-          <Footer />
-        </div>
+        <ThemeProvider>
+          <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+            <Navbar />
+            <main className="flex w-full flex-1 flex-col items-center">
+              <div className="mx-auto w-full max-w-[1200px] px-200 py-300 md:px-500">
+                {children}
+              </div>
+            </main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
