@@ -28,7 +28,7 @@ export default function WatchlistButton({ showId }: WatchlistButtonProps) {
     return (
       <button
         disabled
-        className="bg-background-neutral dark:bg-background-neutral-bold text-text dark:text-text-inverse rounded-radius-large font-weight-bold flex flex-1 items-center justify-center gap-100 p-150 opacity-50"
+        className="bg-background-neutral text-text rounded-radius-large font-weight-bold flex flex-1 items-center justify-center gap-100 p-150 opacity-50"
       >
         <span className="material-symbols-outlined">hourglass_empty</span>
         Loading...
@@ -42,7 +42,7 @@ export default function WatchlistButton({ showId }: WatchlistButtonProps) {
       className={`rounded-radius-large font-weight-bold flex flex-1 items-center justify-center gap-100 p-150 transition-colors ${
         inWatchlist
           ? 'bg-background-brand-bold text-text-inverse hover:bg-background-brand-bold-hovered'
-          : 'bg-background-neutral dark:bg-background-neutral-bold text-text dark:text-text-inverse hover:bg-background-neutral-hovered dark:hover:bg-background-neutral-subtle-hovered'
+          : 'bg-background-neutral text-text hover:bg-background-neutral-hovered dark:hover:bg-background-neutral-subtle-hovered'
       }`}
     >
       <span className="material-symbols-outlined">{inWatchlist ? 'check' : 'add'}</span>
