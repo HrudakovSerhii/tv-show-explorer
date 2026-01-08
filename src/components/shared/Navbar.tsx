@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Link from 'next/link';
 
 import NavLinks from './NavLinks';
@@ -18,7 +18,9 @@ const Navbar: React.FC = () => {
           </h2>
         </Link>
         <div className="hidden flex-1 items-center justify-end gap-400 md:flex">
-          <NavLinks />
+          <Suspense fallback={<div className="h-9" />}>
+            <NavLinks />
+          </Suspense>
         </div>
         <button className="text-text dark:text-text-inverse md:hidden">
           <span className="material-symbols-outlined">menu</span>
