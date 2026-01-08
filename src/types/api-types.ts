@@ -20,6 +20,11 @@ export interface Episode {
   image?: { medium: string; original: string };
   runtime?: number;
   rating?: { average: number };
+  url: string;
+  _links: {
+    self: { href: 'https://api.tvmaze.com/episodes/1648840' };
+    show: { href: 'https://api.tvmaze.com/shows/19'; name: 'Supernatural' };
+  };
 }
 
 export interface Show {
