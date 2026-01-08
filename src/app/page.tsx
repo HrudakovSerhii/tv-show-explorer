@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import HeroSearch from '@/components/shared/HeroSearch';
+import WebSchedule from '@/components/schedule/WebSchedule';
+import WebScheduleSkeleton from '@/components/schedule/WebScheduleSkeleton';
 
 export default function Home() {
   return (
@@ -9,13 +11,14 @@ export default function Home() {
 
       <section className="flex flex-col gap-200">
         <div className="flex items-center justify-between">
-          <h2 className="text-text dark:text-text-inverse text-2xl leading-tight font-bold tracking-tight">
+          <h2 className="text-text dark:text-text-inverse font-weight-bold text-2xl leading-tight tracking-tight">
             Web/Streaming Schedule
           </h2>
+          <p className="text-text-subtle text-sm">Today&apos;s releases</p>
         </div>
-        <div className="grid grid-cols-2 gap-300 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {/*Streaming Schedule list*/}
-        </div>
+        <Suspense fallback={<WebScheduleSkeleton />}>
+          <WebSchedule />
+        </Suspense>
       </section>
     </div>
   );
