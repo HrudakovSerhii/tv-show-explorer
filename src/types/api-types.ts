@@ -38,3 +38,19 @@ export interface Show {
     cast?: CastMember[];
   };
 }
+
+export interface ScheduleEpisode {
+  id: number | string;
+  name: string;
+  season: number;
+  number: number;
+  airdate: string;
+  airtime: string;
+  runtime?: number;
+  rating?: { average: number | null };
+  image?: { medium: string; original: string };
+  summary?: string;
+  _embedded?: {
+    show: Show;
+  };
+}
