@@ -67,8 +67,8 @@ export function clearAll(): void {
 }
 
 /**
-* Watchlist-Specific Functions
-*/
+ * Watchlist-Specific Functions
+ */
 
 export function getWatchlist(): WatchlistItem[] {
   return getItem<WatchlistItem[]>(WATCHLIST_KEY) || [];
