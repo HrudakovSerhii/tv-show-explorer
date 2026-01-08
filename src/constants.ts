@@ -3,4 +3,5 @@ export const NAV_URLS = {
   watchlist: '/watchlist',
   favorites: '/favorites',
   search: '/search',
+  show: '/show',
 };
