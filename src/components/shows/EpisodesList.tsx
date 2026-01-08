@@ -44,7 +44,7 @@ export default function EpisodesList({ showId, availableSeasons, episodes }: Epi
         <div className="relative">
           <button
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="bg-background-neutral hover:bg-background-neutral-hovered dark:hover:bg-background-neutral-subtle-hovered border-border text-text shadow-raised rounded-radius-medium font-weight-medium flex items-center gap-100 border px-200 py-150 text-sm transition-colors"
+            className="bg-background-neutral hover:bg-background-neutral-hovered border-border text-text shadow-raised rounded-radius-medium font-weight-medium flex items-center gap-100 border px-200 py-150 text-sm transition-colors"
           >
             Season {selectedSeason}
             <span className="material-symbols-outlined text-[20px]">
@@ -63,7 +63,7 @@ export default function EpisodesList({ showId, availableSeasons, episodes }: Epi
                     className={`text-text font-weight-medium w-full px-200 py-150 text-left text-sm transition-colors ${
                       season === selectedSeason
                         ? 'bg-background-selected text-brand'
-                        : 'hover:bg-background-neutral-hovered dark:hover:bg-background-neutral-subtle-hovered'
+                        : 'hover:bg-background-neutral-hovered'
                     }`}
                   >
                     Season {season}

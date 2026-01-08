@@ -17,7 +17,7 @@ const NavbarMenu = () => {
       <AppThemeSwitch />
 
       <button
-        className="text-text hover:bg-background-neutral-subtle-hovered dark:hover:bg-background-neutral-hovered rounded-radius-large p-100 transition-colors md:hidden"
+        className="text-text hover:bg-background-neutral-subtle-hovered rounded-radius-large p-100 transition-colors md:hidden"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
         aria-label="Toggle menu"
       >
@@ -30,7 +30,7 @@ const NavbarMenu = () => {
       >
         <NavLinks
           className="flex flex-col gap-100 px-100 pb-50"
-          itemClassName="hover:bg-background-neutral-subtle-hovered dark:hover:bg-background-neutral-hovered rounded-radius-large w-full p-150"
+          itemClassName="hover:bg-background-neutral-subtle-hovered rounded-radius-large w-full p-150"
         />
       </div>
 
