@@ -14,9 +14,9 @@ export type ShowPageProps = {
   params: Promise<{ id: string }>;
 };
 
-type ShowDetailsProps = { params: Promise<{ id: string }> };
+export type ShowDetailsProps = { params: Promise<{ id: string }> };
 
-async function ShowDetails({ params }: ShowDetailsProps) {
+export async function ShowDetails({ params }: ShowDetailsProps) {
   const { id } = await params;
   const show = await getShowDetails(id);
 
@@ -24,7 +24,7 @@ async function ShowDetails({ params }: ShowDetailsProps) {
     return (
       <div className="flex flex-col items-center gap-200 py-1000 text-center">
         <span className="material-symbols-outlined text-icon-subtlest text-6xl">tv_off</span>
-        <h1 className="text-text dark:text-text-inverse font-weight-bold text-2xl">
+        <h1 className="text-text font-weight-bold text-2xl">
           Show not found
         </h1>
         <Link
@@ -37,8 +37,8 @@ async function ShowDetails({ params }: ShowDetailsProps) {
     );
   }
 
-  const episodes = show?._embedded?.episodes;
-  const availableSeasons = episodes?.length
+  const episodes = show?._embedded?.episodes || [];
+  const availableSeasons = episodes.length
     ? [...new Set(episodes.map((ep) => ep.season))].sort((a, b) => a - b)
     : [];
 
@@ -127,14 +127,12 @@ async function ShowDetails({ params }: ShowDetailsProps) {
           </div>
         </div>
       </div>
-      {episodes && episodes.length > 0 && (
-        <EpisodesList showId={id} availableSeasons={availableSeasons} episodes={episodes} />
-      )}
+      <EpisodesList showId={id} availableSeasons={availableSeasons} episodes={episodes} />
     </>
   );
 }
 
-function ShowPageSkeleton() {
+export function ShowPageSkeleton() {
   return (
     <>
       <div className="mb-600 grid grid-cols-1 gap-400 px-200 md:grid-cols-[280px_1fr]">
