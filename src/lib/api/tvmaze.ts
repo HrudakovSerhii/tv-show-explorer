@@ -2,7 +2,7 @@ import { cacheLife } from 'next/cache';
 
 import { formatErrorMessage, createApiStatusError } from './error-utils';
 
-import type { Show, Episode, ScheduleEpisode } from '@/types/api-types';
+import type { Show, Episode, ScheduleEpisode, Season } from '@/types/api-types';
 
 const BASE_URL = 'https://api.tvmaze.com';
 
@@ -94,5 +94,23 @@ export async function getWebSchedule(options?: {
   } catch (error) {
     console.error(formatErrorMessage('Fetching web schedule failed:', error));
     return [];
+  }
+}
+
+export async function getShowSeasons(id: string | number): Promise<Array<Season> | null> {
+  'use cache';
+  cacheLife('season');
+
+  try {
+    const response = await fetch(`${BASE_URL}/shows/${id}/seasons`);
+
+    if (!response.ok) {
+      throw createApiStatusError(`Failed to fetch show ${id} seasons`, response.status);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error(formatErrorMessage('Fetching show seasons failed:', error));
+    return null;
   }
 }

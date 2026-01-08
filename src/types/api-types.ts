@@ -54,3 +54,31 @@ export interface ScheduleEpisode {
     show: Show;
   };
 }
+
+export type Season = {
+  id: number | string;
+  url: string;
+  number: number;
+  name: string;
+  episodeOrder: number;
+  premiereDate: string;
+  endDate: string;
+  network: {
+    id: number | string;
+    name: string;
+    country: {
+      name: string;
+      code: string;
+      timezone: string;
+    };
+    officialSite?: string;
+  };
+  webChannel: string | null;
+  image?: { medium: string; original: string };
+  summary: string;
+  _links: {
+    self: {
+      href: string;
+    };
+  };
+};
