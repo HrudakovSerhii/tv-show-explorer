@@ -3,6 +3,8 @@ import Link from 'next/link';
 
 import { searchShows } from '@/lib/api/tvmaze';
 
+import ShowCard from '@/components/shows/ShowCard';
+
 import { NAV_URLS } from '@/constants';
 
 export type SearchPageProps = {
@@ -37,7 +39,7 @@ async function SearchResults({ params }: { params: Promise<{ query: string }> })
 
       <div className="grid grid-cols-2 gap-300 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {results.map((show) => (
-          <span key={show.id}>{show.name}</span>
+          <ShowCard key={show.id} show={show} />
         ))}
       </div>
     </>
@@ -47,12 +49,12 @@ async function SearchResults({ params }: { params: Promise<{ query: string }> })
 function SearchLoadingSkeleton() {
   return (
     <>
-      <div className="bg-background-neutral-subtle h-8 w-64 animate-pulse rounded-radius-medium" />
+      <div className="bg-background-neutral-subtle rounded-radius-medium h-8 w-64 animate-pulse" />
       <div className="grid grid-cols-2 gap-300 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {Array.from({ length: 10 }).map((_, i) => (
           <div key={i} className="flex flex-col gap-150">
-            <div className="bg-background-neutral-subtle aspect-[2/3] w-full animate-pulse rounded-radius-large" />
-            <div className="bg-background-neutral-subtle h-4 w-3/4 animate-pulse rounded-radius-small" />
+            <div className="bg-background-neutral-subtle rounded-radius-large aspect-[2/3] w-full animate-pulse" />
+            <div className="bg-background-neutral-subtle rounded-radius-small h-4 w-3/4 animate-pulse" />
           </div>
         ))}
       </div>
