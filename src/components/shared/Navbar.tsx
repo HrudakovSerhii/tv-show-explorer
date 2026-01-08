@@ -3,11 +3,7 @@ import Link from 'next/link';
 
 import NavLinks from './NavLinks';
 
-export const NAV_URLS = {
-  home: '/',
-  watchlist: '/watchlist',
-  favorites: '/favorites',
-};
+import { NAV_URLS } from '@/constants';
 
 const Navbar: React.FC = () => {
   return (

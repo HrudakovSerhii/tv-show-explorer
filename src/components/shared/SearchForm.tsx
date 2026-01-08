@@ -2,9 +2,11 @@
 
 import SubmitButton from './SubmitButton';
 
+import { searchAction } from '@/app/actions/search';
+
 export default function SearchForm() {
   return (
-    <form className="relative flex w-full items-center">
+    <form action={searchAction} className="relative flex w-full items-center">
       <div className="text-icon-subtlest pointer-events-none absolute left-200 flex items-center justify-center">
         <span className="material-symbols-outlined">search</span>
       </div>

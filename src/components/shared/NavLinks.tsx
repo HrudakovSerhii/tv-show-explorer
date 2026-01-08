@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { NAV_URLS } from './Navbar';
+import { NAV_URLS } from '@/constants';
 
 const NavLinks: React.FC = () => {
   const pathname = usePathname();
