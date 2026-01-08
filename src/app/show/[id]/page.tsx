@@ -1,9 +1,10 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
 
-import { getShowDetails, getShowSeasons } from '@/lib/api/tvmaze';
+import { getShowDetails } from '@/lib/api/tvmaze';
 import { stripHtml } from '@/lib/utils/format';
 
+import EpisodesList from '@/components/shows/EpisodesList';
 import WatchlistButton from '@/components/shows/WatchlistButton';
 
 import { NAV_URLS } from '@/constants';
@@ -12,10 +13,11 @@ export type ShowPageProps = {
   params: Promise<{ id: string }>;
 };
 
-async function ShowDetails({ params }: { params: Promise<{ id: string }> }) {
+type ShowDetailsProps = { params: Promise<{ id: string }> };
+
+async function ShowDetails({ params }: ShowDetailsProps) {
   const { id } = await params;
   const show = await getShowDetails(id);
-  const seasons = await getShowSeasons(id);
 
   if (!show) {
     return (
@@ -33,6 +35,11 @@ async function ShowDetails({ params }: { params: Promise<{ id: string }> }) {
       </div>
     );
   }
+
+  const episodes = show?._embedded?.episodes;
+  const availableSeasons = episodes?.length
+    ? [...new Set(episodes.map((ep) => ep.season))].sort((a, b) => a - b)
+    : [];
 
   return (
     <>
@@ -70,16 +77,18 @@ async function ShowDetails({ params }: { params: Promise<{ id: string }> }) {
           </h1>
         </div>
 
-        <div className="mb-300 flex flex-wrap items-center gap-x-300 gap-y-150 text-sm md:text-base">
-          <div className="text-text dark:text-text-inverse font-weight-bold flex items-center gap-50">
-            <span className="material-symbols-outlined text-icon-accent-yellow !fill-1">star</span>
-            <span>{show.rating.average}/10</span>
+          <div className="mb-300 flex flex-wrap items-center gap-x-300 gap-y-150 text-sm md:text-base">
+            <div className="text-text dark:text-text-inverse font-weight-bold flex items-center gap-50">
+              <span className="material-symbols-outlined text-icon-accent-yellow !fill-1">
+                star
+              </span>
+              <span>{show.rating.average}/10</span>
+            </div>
+            <span className="text-border-bold">|</span>
+            <span className="text-text-subtle">{show.premiered}</span>
+            <span className="text-border-bold">|</span>
+            <span className="text-text-subtle">{availableSeasons?.length || 'N/A'} Seasons</span>
           </div>
-          <span className="text-border-bold">|</span>
-          <span className="text-text-subtle">{show.premiered}</span>
-          <span className="text-border-bold">|</span>
-          <span className="text-text-subtle">{seasons?.length || 'N/A'} Seasons</span>
-        </div>
 
         <div className="mb-300">
           {/*<RatingControl*/}
@@ -115,6 +124,9 @@ async function ShowDetails({ params }: { params: Promise<{ id: string }> }) {
           </div>
         </div>
       </div>
+      {episodes && episodes.length > 0 && (
+        <EpisodesList showId={id} availableSeasons={availableSeasons} episodes={episodes} />
+      )}
     </>
   );
 }
