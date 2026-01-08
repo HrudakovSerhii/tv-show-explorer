@@ -39,7 +39,7 @@ export async function ShowDetails({ params }: ShowDetailsProps) {
   const availableSeasons = episodes.length
     ? [...new Set(episodes.map((ep) => ep.season))].sort((a, b) => a - b)
     : [];
-
+  // TODO: implement share functionality
   return (
     <>
       <div className="mb-400 grid grid-cols-1 gap-400 px-200 md:grid-cols-[280px_1fr]">
