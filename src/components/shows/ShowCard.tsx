@@ -22,7 +22,7 @@ const ShowCard: React.FC<ShowCardProps> = ({ show, onToggleWatchlist, isInWatchl
       className="group flex cursor-pointer flex-col gap-150"
       href={`${NAV_URLS.show}/${show.id}`}
     >
-      <div className="bg-background-neutral dark:bg-background-neutral-bold shadow-raised rounded-radius-large relative aspect-[2/3] w-full overflow-hidden">
+      <div className="bg-background-neutral shadow-raised rounded-radius-large relative aspect-[2/3] w-full overflow-hidden">
         {hasImage ? (
           <picture className="absolute inset-0">
             {hasOriginal && <source media="(min-width: 768px)" srcSet={show.image!.original!} />}
@@ -66,7 +66,7 @@ const ShowCard: React.FC<ShowCardProps> = ({ show, onToggleWatchlist, isInWatchl
         )}
       </div>
       <div className="flex flex-col gap-1">
-        <h3 className="text-text dark:text-text-inverse group-hover:text-brand font-weight-bold truncate text-left text-base leading-tight transition-colors">
+        <h3 className="text-text group-hover:text-brand font-weight-bold truncate text-left text-base leading-tight transition-colors">
           {show.name}
         </h3>
         <div className="flex flex-wrap items-start">

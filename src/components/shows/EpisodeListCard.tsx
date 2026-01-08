@@ -46,7 +46,7 @@ export default function EpisodeListCard({
   return (
     <Link
       href={`${NAV_URLS.show}/${showId}/${episode.id}`}
-      className="bg-background-neutral dark:bg-background-neutral-bold hover:bg-background-neutral-hovered dark:hover:bg-background-neutral-subtle-hovered shadow-raised hover:shadow-overlay border-border dark:border-border-inverse group rounded-radius-large flex cursor-pointer flex-col gap-200 border p-200 transition-all sm:flex-row"
+      className="bg-background-neutral hover:bg-background-neutral-hovered dark:hover:bg-background-neutral-subtle-hovered shadow-raised hover:shadow-overlay border-border group rounded-radius-large flex cursor-pointer flex-col gap-200 border p-200 transition-all sm:flex-row"
     >
       <div className="bg-background-neutral-subtle rounded-radius-medium relative aspect-video w-full flex-shrink-0 overflow-hidden sm:w-48">
         {episode.image?.medium || episode.image?.original ? (
@@ -80,7 +80,7 @@ export default function EpisodeListCard({
             <span className="text-text-subtlest font-weight-medium text-xs">{episode.airdate}</span>
           )}
         </div>
-        <h4 className="text-text dark:text-text-inverse group-hover:text-brand font-weight-bold mb-50 truncate text-lg transition-colors">
+        <h4 className="text-text group-hover:text-brand font-weight-bold mb-50 truncate text-lg transition-colors">
           {episode.name}
         </h4>
         {episode.summary && (

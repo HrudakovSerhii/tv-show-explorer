@@ -18,7 +18,7 @@ async function SearchResults({ params }: { params: Promise<{ query: string }> })
 
   return (
     <>
-      <h2 className="text-text dark:text-text-inverse font-weight-bold text-left text-2xl">
+      <h2 className="text-text font-weight-bold text-left text-2xl">
         Search results for &quot;{decodedQuery}&quot;
       </h2>
 
