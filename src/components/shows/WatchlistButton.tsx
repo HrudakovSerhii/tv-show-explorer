@@ -42,7 +42,7 @@ export default function WatchlistButton({ showId }: WatchlistButtonProps) {
       className={`rounded-radius-large font-weight-bold flex flex-1 items-center justify-center gap-100 p-150 transition-colors ${
         inWatchlist
           ? 'bg-background-brand-bold text-text-inverse hover:bg-background-brand-bold-hovered'
-          : 'bg-background-neutral text-text hover:bg-background-neutral-hovered dark:hover:bg-background-neutral-subtle-hovered'
+          : 'bg-background-neutral text-text hover:bg-background-neutral-hovered'
       }`}
     >
       <span className="material-symbols-outlined">{inWatchlist ? 'check' : 'add'}</span>

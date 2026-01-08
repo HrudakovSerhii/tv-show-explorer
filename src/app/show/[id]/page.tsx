@@ -24,9 +24,7 @@ export async function ShowDetails({ params }: ShowDetailsProps) {
     return (
       <div className="flex flex-col items-center gap-200 py-1000 text-center">
         <span className="material-symbols-outlined text-icon-subtlest text-6xl">tv_off</span>
-        <h1 className="text-text font-weight-bold text-2xl">
-          Show not found
-        </h1>
+        <h1 className="text-text font-weight-bold text-2xl">Show not found</h1>
         <Link
           href={NAV_URLS.home}
           className="text-brand font-weight-medium flex items-center gap-50 text-sm hover:underline"
@@ -67,7 +65,7 @@ export async function ShowDetails({ params }: ShowDetailsProps) {
           </div>
           <div className="flex gap-100">
             <WatchlistButton showId={show.id} />
-            <button className="bg-background-neutral hover:bg-background-neutral-hovered dark:hover:bg-background-neutral-subtle-hovered text-text rounded-radius-large flex items-center justify-center p-150 transition-colors">
+            <button className="bg-background-neutral hover:bg-background-neutral-hovered text-text rounded-radius-large flex items-center justify-center p-150 transition-colors">
               <span className="material-symbols-outlined">share</span>
             </button>
           </div>
@@ -90,14 +88,6 @@ export async function ShowDetails({ params }: ShowDetailsProps) {
             <span className="text-text-subtle">{show.premiered}</span>
             <span className="text-border-bold">|</span>
             <span className="text-text-subtle">{availableSeasons?.length || 'N/A'} Seasons</span>
-          </div>
-
-          <div className="mb-300">
-            {/*<RatingControl*/}
-            {/*  initialRating={userRating}*/}
-            {/*  onRate={(rating) => onRate(show.id, rating)}*/}
-            {/*  label="My Show Rating"*/}
-            {/*/>*/}
           </div>
 
           <div className="mb-300 flex flex-wrap gap-100">

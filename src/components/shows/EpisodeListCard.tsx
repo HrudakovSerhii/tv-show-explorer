@@ -46,7 +46,7 @@ export default function EpisodeListCard({
   return (
     <Link
       href={`${NAV_URLS.show}/${showId}/${episode.id}`}
-      className="bg-background-neutral hover:bg-background-neutral-hovered dark:hover:bg-background-neutral-subtle-hovered shadow-raised hover:shadow-overlay border-border group rounded-radius-large flex cursor-pointer flex-col gap-200 border p-200 transition-all sm:flex-row"
+      className="bg-background-neutral hover:bg-background-neutral-hovered shadow-raised hover:shadow-overlay border-border group rounded-radius-large flex cursor-pointer flex-col gap-200 border p-200 transition-all sm:flex-row"
     >
       <div className="bg-background-neutral-subtle rounded-radius-medium relative aspect-video w-full flex-shrink-0 overflow-hidden sm:w-48">
         {episode.image?.medium || episode.image?.original ? (
