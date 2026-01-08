@@ -3,6 +3,7 @@
  */
 
 export const WATCHLIST_KEY = 'tv-show-watchlist';
+export const THEME_KEY = 'tv-show-theme';
 
 export type WatchlistItem = {
   id: string | number;
@@ -114,4 +115,22 @@ export function toggleWatchlist(showId: string | number): boolean {
 
 export function clearWatchlist(): void {
   removeItem(WATCHLIST_KEY);
+}
+
+/**
+ * Theme-Specific Functions
+ */
+
+export type ThemeMode = 'light' | 'dark';
+
+export function getTheme(): ThemeMode {
+  return getItem<ThemeMode>(THEME_KEY) || 'dark';
+}
+
+export function setTheme(theme: ThemeMode): boolean {
+  return setItem(THEME_KEY, theme);
+}
+
+export function clearTheme(): void {
+  removeItem(THEME_KEY);
 }

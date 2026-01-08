@@ -3,15 +3,19 @@
 import React from 'react';
 
 import NavLinks from '@/components/shared/NavLinks';
+import AppThemeSwitch from '@/components/shared/ThemeSwitch';
 
 const NavbarMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <div>
+    <div className="flex flex-row items-center gap-200">
       <div className="hidden flex-1 items-center justify-end gap-400 md:flex">
         <NavLinks className="flex items-center gap-400" />
       </div>
+
+      <AppThemeSwitch />
+
       <button
         className="text-text dark:text-text-inverse hover:bg-background-neutral-subtle-hovered dark:hover:bg-background-neutral-hovered rounded-radius-large p-100 transition-colors md:hidden"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
