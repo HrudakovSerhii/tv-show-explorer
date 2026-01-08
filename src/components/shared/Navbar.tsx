@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
 
-import NavLinks from './NavLinks';
+import NavbarMenu from '@/components/shared/NavbarMenu';
 
 import { NAV_URLS } from '@/constants';
 
@@ -17,14 +17,9 @@ const Navbar: React.FC = () => {
             TV-Show Explorer
           </h2>
         </Link>
-        <div className="hidden flex-1 items-center justify-end gap-400 md:flex">
-          <Suspense fallback={<div className="h-9" />}>
-            <NavLinks />
-          </Suspense>
-        </div>
-        <button className="text-text dark:text-text-inverse md:hidden">
-          <span className="material-symbols-outlined">menu</span>
-        </button>
+        <Suspense fallback={<div className="h-9" />}>
+          <NavbarMenu />
+        </Suspense>
       </div>
     </header>
   );

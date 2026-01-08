@@ -12,7 +12,7 @@ export default function SearchForm() {
       </div>
       <input
         name="query"
-        className="rounded-large bg-background-input text-text placeholder:text-text-subtlest focus:ring-border-width-focused focus:ring-border-focused shadow-overlay h-14 w-full border-0 pr-32 pl-600 text-base md:h-80"
+        className="rounded-large bg-background-input text-text placeholder:text-text-subtlest focus:ring-border-width-focused focus:ring-border-focused shadow-overlay h-14 w-full border-0 pr-32 pl-600 text-base md:h-14"
         placeholder="Search for TV shows (e.g., Breaking Bad)..."
         type="text"
         required
