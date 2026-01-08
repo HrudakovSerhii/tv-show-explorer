@@ -7,10 +7,8 @@
 
 @theme {
   /* === Spacing Tokens === */
-  --spacing-0: 0rem;
   --spacing-25: 0.125rem;
   --spacing-50: 0.25rem;
-  --spacing-75: 0.375rem;
   --spacing-100: 0.5rem;
   --spacing-150: 0.75rem;
   --spacing-200: 1rem;
@@ -19,244 +17,38 @@
   --spacing-400: 2rem;
   --spacing-500: 2.5rem;
   --spacing-600: 3rem;
-  --spacing-800: 4rem;
   --spacing-1000: 5rem;
-  --spacing-negative-25: -0.125rem;
-  --spacing-negative-50: -0.25rem;
-  --spacing-negative-75: -0.375rem;
-  --spacing-negative-100: -0.5rem;
-  --spacing-negative-150: -0.75rem;
-  --spacing-negative-200: -1rem;
-  --spacing-negative-250: -1.25rem;
-  --spacing-negative-300: -1.5rem;
-  --spacing-negative-400: -2rem;
 
   /* === Color Tokens - Text === */
   --color-text: #292a2e;
-  --color-text-accent-lime: #4c6b1f;
-  --color-text-accent-lime-bolder: #37471f;
-  --color-text-accent-red: #ae2e24;
-  --color-text-accent-red-bolder: #5d1f1a;
-  --color-text-accent-orange: #9e4c00;
-  --color-text-accent-orange-bolder: #693200;
-  --color-text-accent-yellow: #7f5f01;
-  --color-text-accent-yellow-bolder: #533f04;
-  --color-text-accent-green: #216e4e;
-  --color-text-accent-green-bolder: #164b35;
-  --color-text-accent-teal: #206a83;
-  --color-text-accent-teal-bolder: #164555;
-  --color-text-accent-blue: #1558bc;
-  --color-text-accent-blue-bolder: #123263;
-  --color-text-accent-purple: #803fa5;
-  --color-text-accent-purple-bolder: #48245d;
-  --color-text-accent-magenta: #943d73;
-  --color-text-accent-magenta-bolder: #50253f;
-  --color-text-accent-gray: #505258;
-  --color-text-accent-gray-bolder: #1e1f21;
   --color-text-disabled: #080f214a;
   --color-text-inverse: #ffffff;
   --color-text-selected: #1868db;
   --color-text-brand: #1868db;
-  --color-text-danger: #ae2e24;
-  --color-text-danger-bolder: #5d1f1a;
-  --color-text-warning: #9e4c00;
-  --color-text-warning-inverse: #292a2e;
-  --color-text-warning-bolder: #693200;
-  --color-text-success: #4c6b1f;
-  --color-text-success-bolder: #37471f;
-  --color-text-discovery: #803fa5;
-  --color-text-discovery-bolder: #48245d;
-  --color-text-information: #1558bc;
-  --color-text-information-bolder: #123263;
   --color-text-subtlest: #6b6e76;
   --color-text-subtle: #505258;
 
-  /* === Color Tokens - Link === */
-  --color-link: #1868db;
-  --color-link-pressed: #1558bc;
-  --color-link-visited: #803fa5;
-  --color-link-visited-pressed: #48245d;
-
   /* === Color Tokens - Icon === */
   --color-icon: #292a2e;
-  --color-icon-accent-lime: #6a9a23;
-  --color-icon-accent-red: #c9372c;
-  --color-icon-accent-orange: #e06c00;
-  --color-icon-accent-yellow: #b38600;
-  --color-icon-accent-green: #22a06b;
-  --color-icon-accent-teal: #2898bd;
   --color-icon-accent-blue: #357de8;
-  --color-icon-accent-purple: #af59e1;
-  --color-icon-accent-magenta: #cd519d;
-  --color-icon-accent-gray: #7d818a;
+  --color-icon-accent-yellow: #b38600;
   --color-icon-disabled: #080f214a;
   --color-icon-inverse: #ffffff;
   --color-icon-selected: #1868db;
   --color-icon-brand: #1868db;
   --color-icon-danger: #c9372c;
-  --color-icon-warning: #e06c00;
-  --color-icon-warning-inverse: #292a2e;
-  --color-icon-success: #6a9a23;
-  --color-icon-discovery: #af59e1;
-  --color-icon-information: #357de8;
   --color-icon-subtlest: #6b6e76;
   --color-icon-subtle: #505258;
 
   /* === Color Tokens - Border === */
   --color-border: #0b120e24;
-  --color-border-accent-lime: #6a9a23;
-  --color-border-accent-red: #e2483d;
-  --color-border-accent-orange: #e06c00;
-  --color-border-accent-yellow: #b38600;
-  --color-border-accent-green: #22a06b;
-  --color-border-accent-teal: #2898bd;
-  --color-border-accent-blue: #357de8;
-  --color-border-accent-purple: #af59e1;
-  --color-border-accent-magenta: #cd519d;
-  --color-border-accent-gray: #7d818a;
   --color-border-disabled: #0515240f;
   --color-border-focused: #4688ec;
   --color-border-input: #8c8f97;
   --color-border-inverse: #ffffff;
   --color-border-selected: #1868db;
   --color-border-brand: #1868db;
-  --color-border-danger: #e2483d;
-  --color-border-warning: #e06c00;
-  --color-border-success: #6a9a23;
-  --color-border-discovery: #af59e1;
-  --color-border-information: #357de8;
   --color-border-bold: #7d818a;
-
-  /* === Color Tokens - Background Accent === */
-  --color-background-accent-lime-subtlest: #efffd6;
-  --color-background-accent-lime-subtlest-hovered: #d3f1a7;
-  --color-background-accent-lime-subtlest-pressed: #bde97c;
-  --color-background-accent-lime-subtler: #d3f1a7;
-  --color-background-accent-lime-subtler-hovered: #bde97c;
-  --color-background-accent-lime-subtler-pressed: #b3df72;
-  --color-background-accent-lime-subtle: #94c748;
-  --color-background-accent-lime-subtle-hovered: #b3df72;
-  --color-background-accent-lime-subtle-pressed: #bde97c;
-  --color-background-accent-lime-bolder: #5b7f24;
-  --color-background-accent-lime-bolder-hovered: #4c6b1f;
-  --color-background-accent-lime-bolder-pressed: #3f5224;
-
-  --color-background-accent-red-subtlest: #ffeceb;
-  --color-background-accent-red-subtlest-hovered: #ffd5d2;
-  --color-background-accent-red-subtlest-pressed: #ffb8b2;
-  --color-background-accent-red-subtler: #ffd5d2;
-  --color-background-accent-red-subtler-hovered: #ffb8b2;
-  --color-background-accent-red-subtler-pressed: #fd9891;
-  --color-background-accent-red-subtle: #f87168;
-  --color-background-accent-red-subtle-hovered: #fd9891;
-  --color-background-accent-red-subtle-pressed: #ffb8b2;
-  --color-background-accent-red-bolder: #c9372c;
-  --color-background-accent-red-bolder-hovered: #ae2e24;
-  --color-background-accent-red-bolder-pressed: #872821;
-
-  --color-background-accent-orange-subtlest: #fff5db;
-  --color-background-accent-orange-subtlest-hovered: #fce4a6;
-  --color-background-accent-orange-subtlest-pressed: #fbd779;
-  --color-background-accent-orange-subtler: #fce4a6;
-  --color-background-accent-orange-subtler-hovered: #fbd779;
-  --color-background-accent-orange-subtler-pressed: #fbc828;
-  --color-background-accent-orange-subtle: #fca700;
-  --color-background-accent-orange-subtle-hovered: #fbc828;
-  --color-background-accent-orange-subtle-pressed: #fbd779;
-  --color-background-accent-orange-bolder: #bd5b00;
-  --color-background-accent-orange-bolder-hovered: #9e4c00;
-  --color-background-accent-orange-bolder-pressed: #7a3b00;
-
-  --color-background-accent-yellow-subtlest: #fef7c8;
-  --color-background-accent-yellow-subtlest-hovered: #f5e989;
-  --color-background-accent-yellow-subtlest-pressed: #efdd4e;
-  --color-background-accent-yellow-subtler: #f5e989;
-  --color-background-accent-yellow-subtler-hovered: #efdd4e;
-  --color-background-accent-yellow-subtler-pressed: #eed12b;
-  --color-background-accent-yellow-subtle: #eed12b;
-  --color-background-accent-yellow-subtle-hovered: #ddb30e;
-  --color-background-accent-yellow-subtle-pressed: #efdd4e;
-  --color-background-accent-yellow-bolder: #946f00;
-  --color-background-accent-yellow-bolder-hovered: #7f5f01;
-  --color-background-accent-yellow-bolder-pressed: #614a05;
-
-  --color-background-accent-green-subtlest: #dcfff1;
-  --color-background-accent-green-subtlest-hovered: #baf3db;
-  --color-background-accent-green-subtlest-pressed: #97edc9;
-  --color-background-accent-green-subtler: #baf3db;
-  --color-background-accent-green-subtler-hovered: #97edc9;
-  --color-background-accent-green-subtler-pressed: #7ee2b8;
-  --color-background-accent-green-subtle: #4bce97;
-  --color-background-accent-green-subtle-hovered: #7ee2b8;
-  --color-background-accent-green-subtle-pressed: #97edc9;
-  --color-background-accent-green-bolder: #1f845a;
-  --color-background-accent-green-bolder-hovered: #216e4e;
-  --color-background-accent-green-bolder-pressed: #19573d;
-
-  --color-background-accent-teal-subtlest: #e7f9ff;
-  --color-background-accent-teal-subtlest-hovered: #c6edfb;
-  --color-background-accent-teal-subtlest-pressed: #b1e4f7;
-  --color-background-accent-teal-subtler: #c6edfb;
-  --color-background-accent-teal-subtler-hovered: #b1e4f7;
-  --color-background-accent-teal-subtler-pressed: #9dd9ee;
-  --color-background-accent-teal-subtle: #6cc3e0;
-  --color-background-accent-teal-subtle-hovered: #9dd9ee;
-  --color-background-accent-teal-subtle-pressed: #b1e4f7;
-  --color-background-accent-teal-bolder: #227d9b;
-  --color-background-accent-teal-bolder-hovered: #206a83;
-  --color-background-accent-teal-bolder-pressed: #1a5265;
-
-  --color-background-accent-blue-subtlest: #e9f2fe;
-  --color-background-accent-blue-subtlest-hovered: #cfe1fd;
-  --color-background-accent-blue-subtlest-pressed: #adcbfb;
-  --color-background-accent-blue-subtler: #cfe1fd;
-  --color-background-accent-blue-subtler-hovered: #adcbfb;
-  --color-background-accent-blue-subtler-pressed: #8fb8f6;
-  --color-background-accent-blue-subtle: #669df1;
-  --color-background-accent-blue-subtle-hovered: #8fb8f6;
-  --color-background-accent-blue-subtle-pressed: #adcbfb;
-  --color-background-accent-blue-bolder: #1868db;
-  --color-background-accent-blue-bolder-hovered: #1558bc;
-  --color-background-accent-blue-bolder-pressed: #144794;
-
-  --color-background-accent-purple-subtlest: #f8eefe;
-  --color-background-accent-purple-subtlest-hovered: #eed7fc;
-  --color-background-accent-purple-subtlest-pressed: #e3bdfa;
-  --color-background-accent-purple-subtler: #eed7fc;
-  --color-background-accent-purple-subtler-hovered: #e3bdfa;
-  --color-background-accent-purple-subtler-pressed: #d8a0f7;
-  --color-background-accent-purple-subtle: #c97cf4;
-  --color-background-accent-purple-subtle-hovered: #d8a0f7;
-  --color-background-accent-purple-subtle-pressed: #e3bdfa;
-  --color-background-accent-purple-bolder: #964ac0;
-  --color-background-accent-purple-bolder-hovered: #803fa5;
-  --color-background-accent-purple-bolder-pressed: #673286;
-
-  --color-background-accent-magenta-subtlest: #ffecf8;
-  --color-background-accent-magenta-subtlest-hovered: #fdd0ec;
-  --color-background-accent-magenta-subtlest-pressed: #fcb6e1;
-  --color-background-accent-magenta-subtler: #fdd0ec;
-  --color-background-accent-magenta-subtler-hovered: #fcb6e1;
-  --color-background-accent-magenta-subtler-pressed: #f797d2;
-  --color-background-accent-magenta-subtle: #e774bb;
-  --color-background-accent-magenta-subtle-hovered: #f797d2;
-  --color-background-accent-magenta-subtle-pressed: #fcb6e1;
-  --color-background-accent-magenta-bolder: #ae4787;
-  --color-background-accent-magenta-bolder-hovered: #943d73;
-  --color-background-accent-magenta-bolder-pressed: #77325b;
-
-  --color-background-accent-gray-subtlest: #f0f1f2;
-  --color-background-accent-gray-subtlest-hovered: #dddee1;
-  --color-background-accent-gray-subtlest-pressed: #b7b9be;
-  --color-background-accent-gray-subtler: #dddee1;
-  --color-background-accent-gray-subtler-hovered: #b7b9be;
-  --color-background-accent-gray-subtler-pressed: #8c8f97;
-  --color-background-accent-gray-subtle: #8c8f97;
-  --color-background-accent-gray-subtle-hovered: #b7b9be;
-  --color-background-accent-gray-subtle-pressed: #dddee1;
-  --color-background-accent-gray-bolder: #6b6e76;
-  --color-background-accent-gray-bolder-hovered: #505258;
-  --color-background-accent-gray-bolder-pressed: #3b3d42;
 
   /* === Color Tokens - Background === */
   --color-background-disabled: #17171708;
@@ -290,197 +82,29 @@
   --color-background-brand-boldest: #1c2b42;
   --color-background-brand-boldest-hovered: #123263;
   --color-background-brand-boldest-pressed: #144794;
-  --color-background-danger: #ffeceb;
-  --color-background-danger-hovered: #ffd5d2;
-  --color-background-danger-pressed: #ffb8b2;
-  --color-background-danger-subtler: #ffd5d2;
-  --color-background-danger-subtler-hovered: #ffb8b2;
-  --color-background-danger-subtler-pressed: #fd9891;
-  --color-background-danger-bold: #c9372c;
-  --color-background-danger-bold-hovered: #ae2e24;
-  --color-background-danger-bold-pressed: #872821;
-  --color-background-warning: #fff5db;
-  --color-background-warning-hovered: #fce4a6;
-  --color-background-warning-pressed: #fbd779;
-  --color-background-warning-subtler: #fce4a6;
-  --color-background-warning-subtler-hovered: #fbd779;
-  --color-background-warning-subtler-pressed: #fbc828;
-  --color-background-warning-bold: #fbc828;
-  --color-background-warning-bold-hovered: #fca700;
-  --color-background-warning-bold-pressed: #f68909;
-  --color-background-success: #efffd6;
-  --color-background-success-hovered: #d3f1a7;
-  --color-background-success-pressed: #bde97c;
-  --color-background-success-subtler: #d3f1a7;
-  --color-background-success-subtler-hovered: #bde97c;
-  --color-background-success-subtler-pressed: #b3df72;
-  --color-background-success-bold: #5b7f24;
-  --color-background-success-bold-hovered: #4c6b1f;
-  --color-background-success-bold-pressed: #3f5224;
-  --color-background-discovery: #f8eefe;
-  --color-background-discovery-hovered: #eed7fc;
-  --color-background-discovery-pressed: #e3bdfa;
-  --color-background-discovery-subtler: #eed7fc;
-  --color-background-discovery-subtler-hovered: #e3bdfa;
-  --color-background-discovery-subtler-pressed: #d8a0f7;
-  --color-background-discovery-bold: #964ac0;
-  --color-background-discovery-bold-hovered: #803fa5;
-  --color-background-discovery-bold-pressed: #673286;
-  --color-background-information: #e9f2fe;
-  --color-background-information-hovered: #cfe1fd;
-  --color-background-information-pressed: #adcbfb;
-  --color-background-information-subtler: #cfe1fd;
-  --color-background-information-subtler-hovered: #adcbfb;
-  --color-background-information-subtler-pressed: #8fb8f6;
-  --color-background-information-bold: #1868db;
-  --color-background-information-bold-hovered: #1558bc;
-  --color-background-information-bold-pressed: #144794;
 
   /* === Color Tokens - Blanket === */
   --color-blanket: #050c1f75;
   --color-blanket-selected: #388bff14;
   --color-blanket-danger: #ef5c4814;
 
-  /* === Color Tokens - Interaction === */
-  --color-interaction-hovered: #00000029;
-  --color-interaction-pressed: #00000052;
-
   /* === Color Tokens - Skeleton === */
   --color-skeleton: #0515240f;
   --color-skeleton-subtle: #17171708;
 
-  /* === Color Tokens - Chart === */
-  --color-chart-categorical-1: #357de8;
-  --color-chart-categorical-1-hovered: #1868db;
-  --color-chart-categorical-2: #82b536;
-  --color-chart-categorical-2-hovered: #6a9a23;
-  --color-chart-categorical-3: #bf63f3;
-  --color-chart-categorical-3-hovered: #af59e1;
-  --color-chart-categorical-4: #f68909;
-  --color-chart-categorical-4-hovered: #e06c00;
-  --color-chart-categorical-5: #1558bc;
-  --color-chart-categorical-5-hovered: #123263;
-  --color-chart-categorical-6: #964ac0;
-  --color-chart-categorical-6-hovered: #803fa5;
-  --color-chart-categorical-7: #42b2d7;
-  --color-chart-categorical-7-hovered: #2898bd;
-  --color-chart-categorical-8: #bd5b00;
-  --color-chart-categorical-8-hovered: #7a3b00;
-  --color-chart-lime-bold: #6a9a23;
-  --color-chart-lime-bold-hovered: #5b7f24;
-  --color-chart-lime-bolder: #5b7f24;
-  --color-chart-lime-bolder-hovered: #4c6b1f;
-  --color-chart-lime-boldest: #4c6b1f;
-  --color-chart-lime-boldest-hovered: #37471f;
-  --color-chart-neutral: #8c8f97;
-  --color-chart-neutral-hovered: #7d818a;
-  --color-chart-red-bold: #f15b50;
-  --color-chart-red-bold-hovered: #e2483d;
-  --color-chart-red-bolder: #e2483d;
-  --color-chart-red-bolder-hovered: #c9372c;
-  --color-chart-red-boldest: #ae2e24;
-  --color-chart-red-boldest-hovered: #5d1f1a;
-  --color-chart-orange-bold: #e06c00;
-  --color-chart-orange-bold-hovered: #bd5b00;
-  --color-chart-orange-bolder: #bd5b00;
-  --color-chart-orange-bolder-hovered: #9e4c00;
-  --color-chart-orange-boldest: #7a3b00;
-  --color-chart-orange-boldest-hovered: #693200;
-  --color-chart-yellow-bold: #b38600;
-  --color-chart-yellow-bold-hovered: #946f00;
-  --color-chart-yellow-bolder: #946f00;
-  --color-chart-yellow-bolder-hovered: #7f5f01;
-  --color-chart-yellow-boldest: #7f5f01;
-  --color-chart-yellow-boldest-hovered: #533f04;
-  --color-chart-green-bold: #22a06b;
-  --color-chart-green-bold-hovered: #1f845a;
-  --color-chart-green-bolder: #1f845a;
-  --color-chart-green-bolder-hovered: #216e4e;
-  --color-chart-green-boldest: #216e4e;
-  --color-chart-green-boldest-hovered: #164b35;
-  --color-chart-teal-bold: #2898bd;
-  --color-chart-teal-bold-hovered: #227d9b;
-  --color-chart-teal-bolder: #227d9b;
-  --color-chart-teal-bolder-hovered: #206a83;
-  --color-chart-teal-boldest: #206a83;
-  --color-chart-teal-boldest-hovered: #164555;
-  --color-chart-blue-bold: #4688ec;
-  --color-chart-blue-bold-hovered: #357de8;
-  --color-chart-blue-bolder: #357de8;
-  --color-chart-blue-bolder-hovered: #1868db;
-  --color-chart-blue-boldest: #1558bc;
-  --color-chart-blue-boldest-hovered: #123263;
-  --color-chart-purple-bold: #bf63f3;
-  --color-chart-purple-bold-hovered: #af59e1;
-  --color-chart-purple-bolder: #af59e1;
-  --color-chart-purple-bolder-hovered: #964ac0;
-  --color-chart-purple-boldest: #803fa5;
-  --color-chart-purple-boldest-hovered: #48245d;
-  --color-chart-magenta-bold: #da62ac;
-  --color-chart-magenta-bold-hovered: #cd519d;
-  --color-chart-magenta-bolder: #cd519d;
-  --color-chart-magenta-bolder-hovered: #ae4787;
-  --color-chart-magenta-boldest: #943d73;
-  --color-chart-magenta-boldest-hovered: #50253f;
-  --color-chart-gray-bold: #8c8f97;
-  --color-chart-gray-bold-hovered: #7d818a;
-  --color-chart-gray-bolder: #7d818a;
-  --color-chart-gray-bolder-hovered: #6b6e76;
-  --color-chart-gray-boldest: #505258;
-  --color-chart-gray-boldest-hovered: #3b3d42;
-  --color-chart-brand: #357de8;
-  --color-chart-brand-hovered: #1868db;
-  --color-chart-danger: #e2483d;
-  --color-chart-danger-hovered: #c9372c;
-  --color-chart-danger-bold: #872821;
-  --color-chart-danger-bold-hovered: #5d1f1a;
-  --color-chart-warning: #f68909;
-  --color-chart-warning-hovered: #e06c00;
-  --color-chart-warning-bold: #bd5b00;
-  --color-chart-warning-bold-hovered: #9e4c00;
-  --color-chart-success: #82b536;
-  --color-chart-success-hovered: #6a9a23;
-  --color-chart-success-bold: #5b7f24;
-  --color-chart-success-bold-hovered: #4c6b1f;
-  --color-chart-discovery: #bf63f3;
-  --color-chart-discovery-hovered: #af59e1;
-  --color-chart-discovery-bold: #803fa5;
-  --color-chart-discovery-bold-hovered: #964ac0;
-  --color-chart-information: #357de8;
-  --color-chart-information-hovered: #1868db;
-  --color-chart-information-bold: #1558bc;
-  --color-chart-information-bold-hovered: #123263;
-
   /* === Border Width === */
-  --border-width: 0.0625rem;
-  --border-width-selected: 0.125rem;
   --border-width-focused: 0.125rem;
 
   /* === Border Radius === */
-  --radius-xsmall: 0.125rem;
   --radius-small: 0.25rem;
   --radius-medium: 0.375rem;
   --radius-large: 0.5rem;
   --radius-xlarge: 0.75rem;
-  --radius-xxlarge: 1rem;
   --radius-full: 624.9375rem;
-  --radius-tile: 25%;
 
   /* === Box Shadow === */
-  --shadow-overflow: 0px 0px 8px #1e1f2129, 0px 0px 1px #1e1f211f;
   --shadow-overlay: 0px 8px 12px #1e1f2126, 0px 0px 1px #1e1f214f;
   --shadow-raised: 0px 1px 1px #1e1f2140, 0px 0px 1px #1e1f214f;
-
-  /* === Font Family === */
-  --font-family-heading: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu,
-    "Helvetica Neue", sans-serif;
-  --font-family-body: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Ubuntu,
-    "Helvetica Neue", sans-serif;
-  --font-family-code: ui-monospace, Menlo, "Segoe UI Mono", "Ubuntu Mono", monospace;
-  --font-family-brand-heading: "Charlie Display", ui-sans-serif, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif;
-  --font-family-brand-body: "Charlie Text", ui-sans-serif, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Ubuntu, "Helvetica Neue", sans-serif;
 
   /* === Font Weight === */
   --font-weight-regular: 400;
@@ -489,11 +113,94 @@
   --font-weight-bold: 700;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Class-based theme switching */
+html.dark,
+:root.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  /* === Dark Mode Color Tokens - Text === */
+  --color-text: #f1f2f4;
+  --color-text-subtle: #b6b9c4;
+  --color-text-subtlest: #8c8f97;
+  --color-text-inverse: #1e1f21;
+  --color-text-disabled: #ffffff4a;
+  --color-text-brand: #579dff;
+  --color-text-selected: #579dff;
+
+  /* === Dark Mode Color Tokens - Icon === */
+  --color-icon: #f1f2f4;
+  --color-icon-subtle: #b6b9c4;
+  --color-icon-subtlest: #8c8f97;
+  --color-icon-inverse: #1e1f21;
+  --color-icon-disabled: #ffffff4a;
+  --color-icon-brand: #579dff;
+  --color-icon-selected: #579dff;
+  --color-icon-danger: #f87168;
+  --color-icon-accent-blue: #85b8ff;
+  --color-icon-accent-yellow: #faa53d;
+
+  /* === Dark Mode Color Tokens - Border === */
+  --color-border: #ffffff33;
+  --color-border-bold: #8c8f97;
+  --color-border-inverse: #1e1f21;
+  --color-border-focused: #85b8ff;
+  --color-border-input: #8c8f97;
+  --color-border-disabled: #ffffff1f;
+  --color-border-selected: #579dff;
+  --color-border-brand: #579dff;
+
+  /* === Dark Mode Color Tokens - Background === */
+  --color-background-input: #23242a;
+  --color-background-input-hovered: #2c2d33;
+  --color-background-input-pressed: #23242a;
+  --color-background-neutral: #ffffff1f;
+  --color-background-neutral-hovered: #ffffff29;
+  --color-background-neutral-pressed: #ffffff3d;
+  --color-background-neutral-subtle: #00000000;
+  --color-background-neutral-subtle-hovered: #ffffff1f;
+  --color-background-neutral-subtle-pressed: #ffffff29;
+  --color-background-neutral-bold: #9ca0ab;
+  --color-background-neutral-bold-hovered: #b6b9c4;
+  --color-background-neutral-bold-pressed: #c7ccd8;
+  --color-background-disabled: #ffffff0f;
+  --color-background-selected: #09326c;
+  --color-background-selected-hovered: #1c4d7a;
+  --color-background-selected-pressed: #0055cc;
+  --color-background-selected-bold: #579dff;
+  --color-background-selected-bold-hovered: #85b8ff;
+  --color-background-selected-bold-pressed: #cfe1fd;
+  --color-background-brand-subtlest: #09326c;
+  --color-background-brand-subtlest-hovered: #1c4d7a;
+  --color-background-brand-subtlest-pressed: #0055cc;
+  --color-background-brand-bold: #579dff;
+  --color-background-brand-bold-hovered: #85b8ff;
+  --color-background-brand-bold-pressed: #cfe1fd;
+  --color-background-brand-boldest: #cfe1fd;
+  --color-background-brand-boldest-hovered: #85b8ff;
+  --color-background-brand-boldest-pressed: #579dff;
+  --color-background-inverse-subtle: #ffffff29;
+  --color-background-inverse-subtle-hovered: #ffffff3d;
+  --color-background-inverse-subtle-pressed: #ffffff52;
+
+  /* === Dark Mode Color Tokens - Blanket === */
+  --color-blanket: #0d1424bf;
+  --color-blanket-selected: #388bff14;
+  --color-blanket-danger: #ef5c4814;
+
+  /* === Dark Mode Color Tokens - Skeleton === */
+  --color-skeleton: #ffffff1f;
+  --color-skeleton-subtle: #ffffff0f;
+
+  /* === Dark Mode Box Shadow === */
+  --shadow-overlay: 0px 8px 12px #03040573, 0px 0px 1px #030405cc;
+  --shadow-raised: 0px 1px 1px #03040599, 0px 0px 1px #030405cc;
+}
+
+html.light,
+:root.light {
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
 body {
