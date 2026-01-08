@@ -37,6 +37,11 @@ const nextConfig: NextConfig = {
       revalidate: 172800, // 2 days
       expire: 604800, // 7 days
     },
+    season: {
+      stale: 86400, // 1 day
+      revalidate: 172800, // 2 days
+      expire: 604800, // 7 days
+    },
   },
   turbopack: {},
   webpack: (config, { defaultLoaders, isServer }) => {
