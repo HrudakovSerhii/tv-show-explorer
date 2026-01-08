@@ -26,16 +26,23 @@ export default function EpisodesListContent({ showId, episodes }: EpisodesListCo
         <Link
           key={ep.id}
           href={`${NAV_URLS.show}/${showId}/${ep.id}`}
-          className="bg-background-neutral dark:bg-background-neutral-bold hover:bg-background-neutral-hovered dark:hover:bg-background-neutral-subtle-hovered shadow-raised hover:shadow-overlay border-border dark:border-border-inverse group flex cursor-pointer flex-col gap-200 rounded-radius-large border p-200 transition-all sm:flex-row"
+          className="bg-background-neutral dark:bg-background-neutral-bold hover:bg-background-neutral-hovered dark:hover:bg-background-neutral-subtle-hovered shadow-raised hover:shadow-overlay border-border dark:border-border-inverse group rounded-radius-large flex cursor-pointer flex-col gap-200 border p-200 transition-all sm:flex-row"
         >
-          <div className="bg-background-neutral-subtle relative aspect-video w-full flex-shrink-0 overflow-hidden rounded-radius-medium sm:w-48">
+          <div className="bg-background-neutral-subtle rounded-radius-medium relative aspect-video w-full flex-shrink-0 overflow-hidden sm:w-48">
             {ep.image?.medium || ep.image?.original ? (
-              <div
-                className="h-full w-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                style={{
-                  backgroundImage: `url("${ep.image.medium || ep.image.original}")`,
-                }}
-              />
+              <picture className="absolute inset-0">
+                {ep.image.original && (
+                  <source media="(min-width: 640px)" srcSet={ep.image.original} />
+                )}
+                {ep.image.medium && (
+                  <source media="(max-width: 639px)" srcSet={ep.image.medium} />
+                )}
+                <img
+                  src={ep.image.medium || ep.image.original}
+                  alt={ep.name}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </picture>
             ) : (
               <div className="flex h-full w-full items-center justify-center">
                 <span className="text-icon-subtle material-symbols-outlined text-4xl">image</span>
@@ -46,14 +53,14 @@ export default function EpisodesListContent({ showId, episodes }: EpisodesListCo
 
           <div className="flex min-w-0 flex-1 flex-col justify-center text-left">
             <div className="mb-100 flex items-center justify-between">
-              <span className="text-brand bg-background-brand-bold/10 rounded-radius-small px-100 py-50 text-xs font-weight-bold">
+              <span className="text-brand bg-background-brand-bold/10 rounded-radius-small font-weight-bold px-100 py-50 text-xs">
                 S{ep.season} E{ep.number}
               </span>
               {ep.airdate && (
-                <span className="text-text-subtlest text-xs font-weight-medium">{ep.airdate}</span>
+                <span className="text-text-subtlest font-weight-medium text-xs">{ep.airdate}</span>
               )}
             </div>
-            <h4 className="text-text dark:text-text-inverse group-hover:text-brand mb-50 truncate text-lg font-weight-bold transition-colors">
+            <h4 className="text-text dark:text-text-inverse group-hover:text-brand font-weight-bold mb-50 truncate text-lg transition-colors">
               {ep.name}
             </h4>
             {ep.summary && (
