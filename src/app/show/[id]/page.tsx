@@ -92,7 +92,7 @@ export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
             )}
           </div>
           <div className="flex gap-100">
-            <WatchlistButton showId={show.id} type="show" />
+            <WatchlistButton id={show.id} type="show" />
             <button className="bg-background-neutral hover:bg-background-neutral-hovered text-text rounded-radius-large flex items-center justify-center p-150 transition-colors">
               <span className="material-symbols-outlined">share</span>
             </button>
@@ -106,11 +106,13 @@ export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
           </div>
 
           <div className="mb-300 flex flex-wrap items-center gap-x-300 gap-y-150 text-sm md:text-base">
-            <div className="text-text font-weight-bold flex items-center gap-50">
-              <span className="material-symbols-outlined text-icon-accent-yellow !fill-1">
+            <div className="ml-auto flex items-center gap-50">
+              <span className="material-symbols-outlined !fill-1 text-[20px] text-amber-400">
                 star
               </span>
-              <span>{show.rating.average}/10</span>
+              <span className="text-text-subtlest font-weight-bold text-sm">
+                {show.rating?.average ? `${show.rating?.average}/10` : 'N/A'}
+              </span>
             </div>
             <span className="text-border-bold">|</span>
             <span className="text-text-subtle">{show.premiered}</span>

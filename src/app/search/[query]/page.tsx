@@ -30,7 +30,7 @@ async function SearchResults({ params }: { params: Promise<{ query: string }> })
           </p>
           <Link
             href={NAV_URLS.home}
-            className="bg-background-brand-bold rounded-radius-medium font-weight-bold text-text-inverse hover:bg-background-brand-bold-hovered px-300 py-100 transition-colors"
+            className="bg-background-brand-bold rounded-radius-medium font-weight-bold text-text hover:bg-background-brand-bold-hovered px-300 py-100 transition-colors"
           >
             Return Home
           </Link>

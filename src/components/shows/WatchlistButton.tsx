@@ -5,21 +5,23 @@ import { useState, useEffect } from 'react';
 import { isInWatchlist, toggleWatchlist } from '@/lib/utils/localStorage';
 
 type WatchlistButtonProps = {
-  showId: string | number;
+  id: string | number;
+  type?: 'show' | 'episode';
 };
 
-export default function WatchlistButton({ showId }: WatchlistButtonProps) {
+export default function WatchlistButton({ id, type = 'show' }: WatchlistButtonProps) {
   const [inWatchlist, setInWatchlist] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load watchlist status on mount
+  const prefixedId = `${type}-${id}`;
+
   useEffect(() => {
-    setInWatchlist(isInWatchlist(showId));
+    setInWatchlist(isInWatchlist(prefixedId));
     setIsLoading(false);
-  }, [showId]);
+  }, [prefixedId]);
 
   const handleToggle = () => {
-    const newStatus = toggleWatchlist(showId);
+    const newStatus = toggleWatchlist(prefixedId);
 
     setInWatchlist(newStatus);
   };
@@ -41,7 +43,7 @@ export default function WatchlistButton({ showId }: WatchlistButtonProps) {
       onClick={handleToggle}
       className={`rounded-radius-large font-weight-bold flex flex-1 items-center justify-center gap-100 p-150 transition-colors ${
         inWatchlist
-          ? 'bg-background-brand-bold text-text-inverse hover:bg-background-brand-bold-hovered'
+          ? 'bg-background-brand-bold text-text hover:bg-background-brand-bold-hovered'
           : 'bg-background-neutral text-text hover:bg-background-neutral-hovered'
       }`}
     >
