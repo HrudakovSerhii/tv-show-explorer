@@ -60,12 +60,13 @@ export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
   // TODO: implement share functionality
   return (
     <>
-      <nav className="flex flex-wrap items-center gap-100 px-200 pb-300 text-sm">
+      <nav className="flex flex-wrap items-center gap-100 px-200 pb-300">
         <Link
           href={NAV_URLS.home}
-          className="text-brand font-weight-medium flex items-center gap-50 text-sm hover:underline"
+          className="text-brand font-weight-medium flex items-center gap-50 hover:underline"
         >
-          <span className="material-symbols-outlined text-sm">arrow_back</span> Back to Home
+          <span className="material-symbols-outlined">arrow_back</span>
+          <span className="truncate text-sm">Back to Home</span>
         </Link>
       </nav>
 
@@ -91,7 +92,7 @@ export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
             )}
           </div>
           <div className="flex gap-100">
-            <WatchlistButton showId={show.id} />
+            <WatchlistButton showId={show.id} type="show" />
             <button className="bg-background-neutral hover:bg-background-neutral-hovered text-text rounded-radius-large flex items-center justify-center p-150 transition-colors">
               <span className="material-symbols-outlined">share</span>
             </button>
