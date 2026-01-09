@@ -35,6 +35,7 @@ yarn-error.log*
 
 # user data
 /data/
+/ui-mocks/
 
 # vercel
 .vercel
