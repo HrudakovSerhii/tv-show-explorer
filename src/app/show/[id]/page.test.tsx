@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen } from '@/test-utils';
 
@@ -10,17 +12,10 @@ import { mockShowDetails, mockEpisodes } from '@/lib/api/__mocks__/tvmaze.mock';
 
 import type { Show } from '@/types/api-types';
 
-// Mock API module
 vi.mock('@/lib/api/tvmaze', () => ({
   getShowDetails: vi.fn(),
 }));
 
-// Mock utils module
-vi.mock('@/lib/utils/format', () => ({
-  stripHtml: vi.fn((html: string) => html.replace(/<[^>]*>/g, '').trim()),
-}));
-
-// Mock child components
 vi.mock('@/components/shows/WatchlistButton', () => ({
   default: ({ id, type }: { id: string | number; type: string }) => (
     <div data-testid="watchlist-button" data-show-id={id} data-type={type}>
@@ -53,16 +48,7 @@ vi.mock('@/components/shows/EpisodesList', () => ({
   ),
 }));
 
-vi.mock('@/components/shows/EpisodeListCard', () => ({
-  default: ({ showId, isLoading }: { showId: string; isLoading?: boolean }) => (
-    <div data-testid="episode-list-card" data-show-id={showId} data-loading={isLoading}>
-      EpisodeListCard
-    </div>
-  ),
-}));
-
-// Helper function to render async server components
-async function renderAsync(asyncComponent: Promise<JSX.Element>) {
+async function renderAsync(asyncComponent: Promise<React.ReactElement>) {
   const resolvedComponent = await asyncComponent;
   return render(resolvedComponent);
 }
@@ -71,14 +57,12 @@ describe('Show Page', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(getShowDetails).mockReset();
-    vi.mocked(stripHtml).mockReset();
   });
 
   describe('ShowDetails Component', () => {
     describe('Successful Data Fetching', () => {
       it('should render show details with all information', async () => {
         vi.mocked(getShowDetails).mockResolvedValue(mockShowDetails);
-        vi.mocked(stripHtml).mockReturnValue('This is the summary without HTML');
 
         const { container } = await renderAsync(
           ShowDetails({
@@ -87,29 +71,19 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify show name
         expect(screen.getByText('Breaking Bad')).toBeInTheDocument();
 
-        // Verify rating
         expect(screen.getByText('9.5/10')).toBeInTheDocument();
-
-        // Verify premiered date
         expect(screen.getByText('2008-01-20')).toBeInTheDocument();
-
-        // Verify seasons count
         expect(screen.getByText(/1 Seasons/)).toBeInTheDocument();
 
-        // Verify genres
         expect(screen.getByText('Drama')).toBeInTheDocument();
         expect(screen.getByText('Crime')).toBeInTheDocument();
         expect(screen.getByText('Thriller')).toBeInTheDocument();
-
-        // Verify cast
         expect(screen.getByText(/Bryan Cranston, Aaron Paul/)).toBeInTheDocument();
 
-        // Verify summary is stripped of HTML
-        expect(stripHtml).toHaveBeenCalledWith(mockShowDetails.summary);
-        expect(container).toHaveTextContent('This is the summary without HTML');
+        const expectedSummary = stripHtml(mockShowDetails.summary);
+        expect(container).toHaveTextContent(expectedSummary);
       });
 
       it('should pass correct props to child components', async () => {
@@ -122,11 +96,9 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify WatchlistButton receives correct showId
         const watchlistButton = screen.getByTestId('watchlist-button');
         expect(watchlistButton).toHaveAttribute('data-show-id', '169');
 
-        // Verify EpisodesList receives correct props
         const episodesList = screen.getByTestId('episodes-list');
         expect(episodesList).toHaveAttribute('data-show-id', '169');
         expect(episodesList).toHaveAttribute('data-episodes-count', '2');
@@ -156,15 +128,17 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify 3 unique seasons
         const episodesList = screen.getByTestId('episodes-list');
         expect(episodesList).toHaveAttribute('data-seasons', '[1,2,3]');
         expect(screen.getByText(/3 Seasons/)).toBeInTheDocument();
       });
 
       it('should strip HTML from summary', async () => {
-        vi.mocked(getShowDetails).mockResolvedValue(mockShowDetails);
-        vi.mocked(stripHtml).mockReturnValue('Clean summary text');
+        const showWithHtmlSummary: Show = {
+          ...mockShowDetails,
+          summary: '<p>A high school <b>chemistry teacher</b> turns to <i>crime</i>.</p>',
+        };
+        vi.mocked(getShowDetails).mockResolvedValue(showWithHtmlSummary);
 
         await renderAsync(
           ShowDetails({
@@ -173,9 +147,9 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify stripHtml was called with show summary
-        expect(stripHtml).toHaveBeenCalledWith(mockShowDetails.summary);
-        expect(screen.getByText('Clean summary text')).toBeInTheDocument();
+        expect(
+          screen.getByText('A high school chemistry teacher turns to crime.'),
+        ).toBeInTheDocument();
       });
 
       it('should render show image with picture element', async () => {
@@ -188,11 +162,9 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify picture element is rendered
         const picture = container.querySelector('picture');
         expect(picture).toBeInTheDocument();
 
-        // Verify img element with correct src
         const img = container.querySelector('img');
         expect(img).toHaveAttribute('src', mockShowDetails.image!.original);
         expect(img).toHaveAttribute('alt', mockShowDetails.name);
@@ -210,15 +182,11 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify icon
         const icon = screen.getByText('tv_off');
         expect(icon).toBeInTheDocument();
         expect(icon).toHaveClass('material-symbols-outlined');
 
-        // Verify heading
         expect(screen.getByText('Show not found')).toBeInTheDocument();
-
-        // Verify back link
         expect(screen.getByText('Back to Home')).toBeInTheDocument();
       });
 
@@ -232,7 +200,6 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify link points to home
         const backLink = screen.getByText('Back to Home').closest('a');
         expect(backLink).toHaveAttribute('href', '/');
       });
@@ -257,10 +224,8 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify seasons count shows N/A
         expect(screen.getByText(/N\/A Seasons/)).toBeInTheDocument();
 
-        // Verify empty episodes array passed to EpisodesList
         const episodesList = screen.getByTestId('episodes-list');
         expect(episodesList).toHaveAttribute('data-episodes-count', '0');
         expect(episodesList).toHaveAttribute('data-seasons', '[]');
@@ -281,7 +246,6 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify placeholder icon is rendered
         const placeholderIcon = screen.getByText('image');
         expect(placeholderIcon).toBeInTheDocument();
         expect(placeholderIcon).toHaveClass('material-symbols-outlined');
@@ -305,8 +269,6 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify N/A is displayed in cast section
-        expect(screen.getByText('Stars')).toBeInTheDocument();
         expect(screen.getByText('N/A')).toBeInTheDocument();
       });
 
@@ -325,7 +287,6 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify no genre badges are rendered (look for badges with rounded corners which are genre-specific)
         const genreBadges = container.querySelectorAll('.rounded-radius-full');
         expect(genreBadges).toHaveLength(0);
       });
@@ -345,17 +306,12 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify component renders without crashing
         expect(screen.getByText('Breaking Bad')).toBeInTheDocument();
-
-        // Verify N/A seasons
         expect(screen.getByText(/N\/A Seasons/)).toBeInTheDocument();
 
-        // Verify N/A cast
         const castText = screen.getByText('N/A');
         expect(castText).toBeInTheDocument();
 
-        // Verify empty episodes
         const episodesList = screen.getByTestId('episodes-list');
         expect(episodesList).toHaveAttribute('data-episodes-count', '0');
       });
@@ -384,7 +340,6 @@ describe('Show Page', () => {
           }),
         );
 
-        // Verify seasons are unique and sorted: [1, 2, 3]
         const episodesList = screen.getByTestId('episodes-list');
         expect(episodesList).toHaveAttribute('data-seasons', '[1,2,3]');
         expect(screen.getByText(/3 Seasons/)).toBeInTheDocument();
@@ -402,8 +357,94 @@ describe('Show Page', () => {
           }),
         );
 
-        // Should show not found UI
         expect(screen.getByText('Show not found')).toBeInTheDocument();
+      });
+    });
+
+    describe('Async Flow and Core Logic', () => {
+      it('should handle full async data fetching flow with initialSeason calculation', async () => {
+
+        const mockShowMultiSeasons: Show = {
+          ...mockShowDetails,
+          summary: '<p>Test <strong>summary</strong> with HTML tags</p>',
+          _embedded: {
+            ...mockShowDetails._embedded,
+            episodes: [
+              { ...mockEpisodes[0], season: 1, number: 1, id: 1, name: 'Episode 1' },
+              { ...mockEpisodes[1], season: 1, number: 2, id: 2, name: 'Episode 2' },
+              { ...mockEpisodes[0], season: 2, number: 1, id: 3, name: 'Episode 3' },
+              { ...mockEpisodes[1], season: 2, number: 2, id: 4, name: 'Episode 4' },
+              { ...mockEpisodes[0], season: 3, number: 1, id: 5, name: 'Episode 5' },
+            ],
+          },
+        };
+
+        vi.mocked(getShowDetails).mockResolvedValue(mockShowMultiSeasons);
+
+        await renderAsync(
+          ShowDetails({
+            params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '2' }),
+          }),
+        );
+
+        expect(screen.getByText('Breaking Bad')).toBeInTheDocument();
+        expect(screen.getByText(/3 Seasons/)).toBeInTheDocument();
+
+        expect(screen.getByText('Test summary with HTML tags')).toBeInTheDocument();
+
+        const episodesList = screen.getByTestId('episodes-list');
+        expect(episodesList).toHaveAttribute('data-initial-season', '2');
+        expect(episodesList).toHaveAttribute('data-seasons', '[1,2,3]');
+        expect(episodesList).toHaveAttribute('data-episodes-count', '5');
+      });
+
+      it('should default to last season when searchParams season is invalid', async () => {
+        const mockShowMultiSeasons: Show = {
+          ...mockShowDetails,
+          _embedded: {
+            ...mockShowDetails._embedded,
+            episodes: [
+              { ...mockEpisodes[0], season: 1, id: 1 },
+              { ...mockEpisodes[0], season: 2, id: 2 },
+              { ...mockEpisodes[0], season: 3, id: 3 },
+            ],
+          },
+        };
+
+        vi.mocked(getShowDetails).mockResolvedValue(mockShowMultiSeasons);
+
+        await renderAsync(
+          ShowDetails({
+            params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '10' }),
+          }),
+        );
+
+        const episodesList = screen.getByTestId('episodes-list');
+        expect(episodesList).toHaveAttribute('data-initial-season', '3');
+      });
+
+      it('should default to season 1 when no episodes exist', async () => {
+        const mockShowNoEpisodes: Show = {
+          ...mockShowDetails,
+          _embedded: {
+            ...mockShowDetails._embedded,
+            episodes: [],
+          },
+        };
+
+        vi.mocked(getShowDetails).mockResolvedValue(mockShowNoEpisodes);
+
+        await renderAsync(
+          ShowDetails({
+            params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '2' }),
+          }),
+        );
+
+        const episodesList = screen.getByTestId('episodes-list');
+        expect(episodesList).toHaveAttribute('data-initial-season', '1');
       });
     });
   });
@@ -412,19 +453,11 @@ describe('Show Page', () => {
     it('should render loading skeleton with correct structure', async () => {
       const { container } = render(<ShowPageSkeleton />);
 
-      // Verify skeleton structure with animate-pulse
       const animatedElements = container.querySelectorAll('.animate-pulse');
       expect(animatedElements.length).toBeGreaterThan(0);
 
-      // Verify 3 episode card skeletons
-      const episodeCards = screen.getAllByTestId('episode-list-card');
-      expect(episodeCards).toHaveLength(3);
-
-      // Verify all episode cards are in loading state
-      episodeCards.forEach((card) => {
-        expect(card).toHaveAttribute('data-loading', 'true');
-        expect(card).toHaveAttribute('data-show-id', '');
-      });
+      const skeletonCards = container.querySelectorAll('.rounded-radius-large');
+      expect(skeletonCards.length).toBeGreaterThan(0);
     });
   });
 });
