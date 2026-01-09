@@ -49,7 +49,7 @@ export default function EpisodesList({
   }
 
   return (
-    <section className="w-full px-200">
+    <section className="w-full">
       <div className="mb-300 flex items-center justify-between">
         <h3 className="text-text font-weight-bold text-2xl">Episodes</h3>
 

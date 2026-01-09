@@ -5,7 +5,7 @@ import SearchForm from './SearchForm';
 
 const HeroSearch: React.FC = () => {
   return (
-    <div className="rounded-radius-xlarge relative flex min-h-[400px] w-full flex-col items-center justify-center overflow-hidden p-300 text-center md:min-h-[480px]">
+    <div className="rounded-radius-xlarge relative flex min-h-[400px] w-full flex-col items-center justify-center overflow-hidden p-200 text-center md:min-h-[480px]">
       <Image
         src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=2069&auto=format&fit=crop"
         alt="TV Show Background"

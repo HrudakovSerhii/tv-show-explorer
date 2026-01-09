@@ -6,7 +6,11 @@ import { stripHtml } from '@/lib/utils/format';
 
 import EpisodeListCard from '@/components/shows/EpisodeListCard';
 import EpisodesList from '@/components/shows/EpisodesList';
+import FavoriteButton from '@/components/shows/FavoriteButton';
+import UserRatingButton from '@/components/shows/UserRatingButton';
+import ShareButton from '@/components/shared/ShareButton';
 import WatchlistButton from '@/components/shows/WatchlistButton';
+import { RatingControlSkeleton } from '@/components/shared/RatingControl';
 
 import { NAV_URLS } from '@/constants';
 
@@ -70,7 +74,7 @@ export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
         </Link>
       </nav>
 
-      <div className="mb-400 grid grid-cols-1 gap-400 px-200 md:grid-cols-[280px_1fr]">
+      <div className="mb-400 grid grid-cols-1 gap-400 md:grid-cols-[280px_1fr]">
         <div className="flex flex-col gap-200">
           <div className="bg-background-neutral shadow-raised rounded-radius-xlarge aspect-[2/3] w-full overflow-hidden">
             {show.image?.original ? (
@@ -91,33 +95,43 @@ export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
               </div>
             )}
           </div>
-          <div className="flex gap-100">
-            <WatchlistButton id={show.id} type="show" />
-            <button className="bg-background-neutral hover:bg-background-neutral-hovered text-text rounded-radius-large flex items-center justify-center p-150 transition-colors">
-              <span className="material-symbols-outlined">share</span>
-            </button>
-          </div>
         </div>
         <div className="flex flex-col pt-100 text-left">
-          <div className="mb-200 flex items-start justify-between">
+          <div className="mb-200 flex flex-col gap-200">
             <h1 className="text-text font-weight-bold text-4xl tracking-tight md:text-5xl">
               {show.name}
             </h1>
           </div>
 
-          <div className="mb-300 flex flex-wrap items-center gap-x-300 gap-y-150 text-sm md:text-base">
-            <div className="ml-auto flex items-center gap-50">
-              <span className="material-symbols-outlined !fill-1 text-[20px] text-amber-400">
-                star
-              </span>
-              <span className="text-text-subtlest font-weight-bold text-sm">
-                {show.rating?.average ? `${show.rating?.average}/10` : 'N/A'}
-              </span>
+          <div className="mb-200 flex flex-col justify-between gap-100 md:flex-row md:items-end md:gap-0">
+            <Suspense fallback={<RatingControlSkeleton label="Rate this show" />}>
+              <UserRatingButton
+                id={show.id}
+                type="show"
+                label="Rate this show"
+                metadata={{ showName: show.name }}
+              />
+            </Suspense>
+            <div className="flex flex-wrap items-center gap-x-300 gap-y-150 pb-100 text-sm md:text-base">
+              <div className="flex items-center gap-50 md:ml-auto">
+                <span className="material-symbols-outlined !fill-1 text-[20px] text-amber-400">
+                  star
+                </span>
+                <span className="text-text-subtlest font-weight-bold text-sm">
+                  {show.rating?.average ? `${show.rating?.average}/10` : 'N/A'}
+                </span>
+              </div>
+              <span className="text-border-bold">|</span>
+              <span className="text-text-subtle">{show.premiered}</span>
+              <span className="text-border-bold">|</span>
+              <span className="text-text-subtle">{availableSeasons?.length || 'N/A'} Seasons</span>
             </div>
-            <span className="text-border-bold">|</span>
-            <span className="text-text-subtle">{show.premiered}</span>
-            <span className="text-border-bold">|</span>
-            <span className="text-text-subtle">{availableSeasons?.length || 'N/A'} Seasons</span>
+          </div>
+
+          <div className="flex flex-wrap gap-150">
+            <WatchlistButton id={show.id} type="show" />
+            <FavoriteButton id={show.id} type="show" metadata={{ showName: show.name }} />
+            <ShareButton title={show.name} text={`Check out ${show.name} on TV Show Explorer`} />
           </div>
 
           <div className="mb-300 flex flex-wrap gap-100">
