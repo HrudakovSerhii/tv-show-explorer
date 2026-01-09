@@ -39,25 +39,22 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
 
   return (
     <div className="animate-fade-in mx-auto flex w-full max-w-[1200px] flex-col">
-      <div className="mb-100 flex flex-col-reverse justify-between gap-200 py-200 md:flex-row md:items-center">
+      {/* Breadcrumb Navigation */}
+      <nav className="flex flex-wrap items-center gap-100 px-200 pb-300 text-sm">
         <Link
-          href={`${NAV_URLS.show}/${id}`}
-          className="bg-background-neutral-subtle hover:bg-background-neutral-subtle-hovered rounded-radius-medium font-weight-bold text-text flex h-10 w-fit cursor-pointer items-center justify-center gap-100 overflow-hidden px-200 text-sm leading-normal tracking-[0.015em] transition-colors"
+          href={NAV_URLS.home}
+          className="text-brand font-weight-medium flex items-center gap-50 text-sm hover:underline"
         >
-          <span className="material-symbols-outlined text-[20px]">arrow_back</span>
-          <span className="truncate">Back to Season {episode.season}</span>
+          <span className="material-symbols-outlined text-sm">arrow_back</span> Back to Home
         </Link>
-
-        <div className="flex flex-wrap items-center gap-100 px-200 text-sm md:px-0">
-          <span className="text-text-subtlest font-weight-medium leading-normal">TV Shows</span>
-          <span className="text-text-subtlest font-weight-medium text-sm">/</span>
-          <span className="text-text-subtlest font-weight-medium leading-normal">{episode._links.show.name}</span>
-          <span className="text-text-subtlest font-weight-medium text-sm">/</span>
-          <span className="text-text font-weight-medium">
-            S{episode.season}: E{episode.number}
-          </span>
-        </div>
-      </div>
+        <span className="text-text-subtlest font-weight-medium">&gt;</span>
+        <Link
+          href={`${NAV_URLS.show}/${id}?season=${episode.season}`}
+          className="text-brand font-weight-medium text-sm hover:underline"
+        >
+          {episode._links.show.name}
+        </Link>
+      </nav>
 
       <div className="grid grid-cols-1 gap-400 p-200 lg:grid-cols-12">
         <div className="flex flex-col gap-200 lg:col-span-5">

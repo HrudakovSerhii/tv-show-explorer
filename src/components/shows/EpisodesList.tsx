@@ -55,7 +55,7 @@ export default function EpisodesList({ showId, availableSeasons, episodes }: Epi
           {isDropdownOpen && (
             <>
               <div className="fixed inset-0 z-10" onClick={() => setIsDropdownOpen(false)} />
-              <div className="bg-background-neutral border-border shadow-overlay rounded-radius-medium absolute top-full right-0 z-20 mt-50 w-48 overflow-hidden border">
+              <div className="bg-background-input border-border shadow-overlay rounded-radius-medium absolute top-full right-0 z-20 mt-50 w-48 overflow-hidden border">
                 {availableSeasons.map((season) => (
                   <button
                     key={season}
