@@ -100,12 +100,6 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
         <div className="flex flex-col gap-300 text-left lg:col-span-7">
           <div className="flex flex-col gap-100">
             <div className="flex items-center gap-150">
-              <div className="font-weight-bold flex items-center gap-50 text-[14px]">
-                <span className="material-symbols-outlined text-icon-accent-yellow !fill-1">
-                  star
-                </span>
-                <span>{episode.rating ? `${episode.rating?.average}/10` : 'N/A'}</span>
-              </div>
               <span className="bg-background-brand-bold/10 text-brand rounded-radius-small font-weight-bold inline-flex items-center px-100 py-50 text-xs">
                 Season {episode.season}
               </span>
@@ -116,10 +110,9 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
                 <span className="material-symbols-outlined !fill-1 text-[20px] text-amber-400">
                   star
                 </span>
-                <span className="text-text font-weight-bold">
-                  <span>{episode.rating ? `${episode.rating?.average}/10` : 'N/A'}</span>
+                <span className="text-text-subtlest font-weight-bold text-sm">
+                  {episode.rating?.average ? `${episode.rating?.average}/10` : 'N/A'}
                 </span>
-                <span className="text-text-subtlest text-sm">/ 10</span>
               </div>
             </div>
             <h1 className="text-text font-weight-bold text-3xl leading-tight tracking-[-0.02em] md:text-4xl">
@@ -129,7 +122,7 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
 
           <div className="flex flex-col gap-200">
             <div className="flex flex-wrap gap-150">
-              <WatchlistButton showId={episodeId} type="episode" />
+              <WatchlistButton id={episodeId} type="episode" />
               <button className="border-border hover:bg-background-neutral-subtle-hovered text-text font-weight-medium rounded-radius-medium flex items-center justify-center gap-100 border px-150 py-100 text-sm transition-colors">
                 <span className="material-symbols-outlined text-[20px]">share</span>
               </button>
