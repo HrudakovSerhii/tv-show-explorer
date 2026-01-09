@@ -12,12 +12,17 @@ import { NAV_URLS } from '@/constants';
 
 export type ShowPageProps = {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ season?: string }>;
 };
 
-export type ShowDetailsProps = { params: Promise<{ id: string }> };
+export type ShowDetailsProps = {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ season?: string }>;
+};
 
-export async function ShowDetails({ params }: ShowDetailsProps) {
+export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
   const { id } = await params;
+  const { season: seasonParam } = await searchParams;
   const show = await getShowDetails(id);
 
   if (!show) {
@@ -40,8 +45,31 @@ export async function ShowDetails({ params }: ShowDetailsProps) {
     ? [...new Set(episodes.map((ep) => ep.season))].sort((a, b) => a - b)
     : [];
 
+  const initialSeason = (() => {
+    if (seasonParam) {
+      const seasonNumber = Number(seasonParam);
+
+      if (availableSeasons.includes(seasonNumber)) {
+        return seasonNumber;
+      }
+    }
+
+    return availableSeasons[availableSeasons.length - 1] || 1;
+  })();
+
+  // TODO: implement share functionality
   return (
     <>
+      <nav className="flex flex-wrap items-center gap-100 px-200 pb-300">
+        <Link
+          href={NAV_URLS.home}
+          className="text-brand font-weight-medium flex items-center gap-50 hover:underline"
+        >
+          <span className="material-symbols-outlined">arrow_back</span>
+          <span className="truncate text-sm">Back to Home</span>
+        </Link>
+      </nav>
+
       <div className="mb-400 grid grid-cols-1 gap-400 px-200 md:grid-cols-[280px_1fr]">
         <div className="flex flex-col gap-200">
           <div className="bg-background-neutral shadow-raised rounded-radius-xlarge aspect-[2/3] w-full overflow-hidden">
@@ -64,7 +92,7 @@ export async function ShowDetails({ params }: ShowDetailsProps) {
             )}
           </div>
           <div className="flex gap-100">
-            <WatchlistButton showId={show.id} />
+            <WatchlistButton id={show.id} type="show" />
             <button className="bg-background-neutral hover:bg-background-neutral-hovered text-text rounded-radius-large flex items-center justify-center p-150 transition-colors">
               <span className="material-symbols-outlined">share</span>
             </button>
@@ -78,11 +106,13 @@ export async function ShowDetails({ params }: ShowDetailsProps) {
           </div>
 
           <div className="mb-300 flex flex-wrap items-center gap-x-300 gap-y-150 text-sm md:text-base">
-            <div className="text-text font-weight-bold flex items-center gap-50">
-              <span className="material-symbols-outlined text-icon-accent-yellow !fill-1">
+            <div className="ml-auto flex items-center gap-50">
+              <span className="material-symbols-outlined !fill-1 text-[20px] text-amber-400">
                 star
               </span>
-              <span>{show.rating.average}/10</span>
+              <span className="text-text-subtlest font-weight-bold text-sm">
+                {show.rating?.average ? `${show.rating?.average}/10` : 'N/A'}
+              </span>
             </div>
             <span className="text-border-bold">|</span>
             <span className="text-text-subtle">{show.premiered}</span>
@@ -117,7 +147,12 @@ export async function ShowDetails({ params }: ShowDetailsProps) {
           </div>
         </div>
       </div>
-      <EpisodesList showId={id} availableSeasons={availableSeasons} episodes={episodes} />
+      <EpisodesList
+        showId={id}
+        availableSeasons={availableSeasons}
+        episodes={episodes}
+        initialSeason={initialSeason}
+      />
     </>
   );
 }
@@ -156,10 +191,10 @@ export function ShowPageSkeleton() {
   );
 }
 
-export default function ShowPage({ params }: ShowPageProps) {
+export default function ShowPage({ params, searchParams }: ShowPageProps) {
   return (
     <Suspense fallback={<ShowPageSkeleton />}>
-      <ShowDetails params={params} />
+      <ShowDetails params={params} searchParams={searchParams} />
     </Suspense>
   );
 }

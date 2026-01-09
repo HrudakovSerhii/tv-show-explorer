@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 
 import EpisodesListContent from './EpisodesListContent';
 
@@ -10,10 +11,19 @@ type EpisodesListProps = {
   showId: string;
   availableSeasons: Array<number>;
   episodes: Array<Episode>;
+  initialSeason: number;
 };
 
-export default function EpisodesList({ showId, availableSeasons, episodes }: EpisodesListProps) {
-  const [selectedSeason, setSelectedSeason] = useState<number>(availableSeasons?.length || 1);
+export default function EpisodesList({
+  showId,
+  availableSeasons,
+  episodes,
+  initialSeason,
+}: EpisodesListProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const [selectedSeason, setSelectedSeason] = useState<number>(initialSeason);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const filteredEpisodes = useMemo(() => {
@@ -23,6 +33,8 @@ export default function EpisodesList({ showId, availableSeasons, episodes }: Epi
   const handleSeasonSelect = (season: number) => {
     setSelectedSeason(season);
     setIsDropdownOpen(false);
+
+    router.replace(`${pathname}?season=${season}`, { scroll: false });
   };
 
   if (episodes.length === 0) {
@@ -37,7 +49,7 @@ export default function EpisodesList({ showId, availableSeasons, episodes }: Epi
   }
 
   return (
-    <section className="px-200">
+    <section className="w-full px-200">
       <div className="mb-300 flex items-center justify-between">
         <h3 className="text-text font-weight-bold text-2xl">Episodes</h3>
 
@@ -55,7 +67,7 @@ export default function EpisodesList({ showId, availableSeasons, episodes }: Epi
           {isDropdownOpen && (
             <>
               <div className="fixed inset-0 z-10" onClick={() => setIsDropdownOpen(false)} />
-              <div className="bg-background-neutral border-border shadow-overlay rounded-radius-medium absolute top-full right-0 z-20 mt-50 w-48 overflow-hidden border">
+              <div className="bg-background-input border-border shadow-overlay rounded-radius-medium absolute top-full right-0 z-20 mt-50 w-48 overflow-hidden border">
                 {availableSeasons.map((season) => (
                   <button
                     key={season}
@@ -68,7 +80,7 @@ export default function EpisodesList({ showId, availableSeasons, episodes }: Epi
                   >
                     Season {season}
                     {season === selectedSeason && (
-                      <span className="material-symbols-outlined ml-50 inline-block text-[16px]">
+                      <span className="material-symbols-outlined text-text float-right ml-50 inline-block text-[20px]">
                         check
                       </span>
                     )}

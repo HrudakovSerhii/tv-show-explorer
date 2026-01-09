@@ -5,7 +5,7 @@ import ShowCard from '@/components/shows/ShowCard';
 import type { Show } from '@/types/api-types';
 
 export default async function WebSchedule() {
-  const schedule = await getWebSchedule();
+  const schedule = await getWebSchedule({ country: 'NL' });
 
   const uniqueShows = schedule
     .filter((episode) => episode._embedded?.show)
