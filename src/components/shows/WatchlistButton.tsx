@@ -43,7 +43,7 @@ export default function WatchlistButton({ id, type = 'show' }: WatchlistButtonPr
       }`}
     >
       <span className="material-symbols-outlined">{inWatchlist ? 'check' : 'add'}</span>
-      {inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+      {inWatchlist ? 'In Your Watchlist!' : 'Add to Watchlist'}
     </button>
   );
 }
