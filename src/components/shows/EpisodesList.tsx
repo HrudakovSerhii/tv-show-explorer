@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 
 import EpisodesListContent from './EpisodesListContent';
 
@@ -10,10 +11,19 @@ type EpisodesListProps = {
   showId: string;
   availableSeasons: Array<number>;
   episodes: Array<Episode>;
+  initialSeason: number;
 };
 
-export default function EpisodesList({ showId, availableSeasons, episodes }: EpisodesListProps) {
-  const [selectedSeason, setSelectedSeason] = useState<number>(availableSeasons?.length || 1);
+export default function EpisodesList({
+  showId,
+  availableSeasons,
+  episodes,
+  initialSeason,
+}: EpisodesListProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const [selectedSeason, setSelectedSeason] = useState<number>(initialSeason);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const filteredEpisodes = useMemo(() => {
@@ -23,6 +33,8 @@ export default function EpisodesList({ showId, availableSeasons, episodes }: Epi
   const handleSeasonSelect = (season: number) => {
     setSelectedSeason(season);
     setIsDropdownOpen(false);
+
+    router.replace(`${pathname}?season=${season}`, { scroll: false });
   };
 
   if (episodes.length === 0) {

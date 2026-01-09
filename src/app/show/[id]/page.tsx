@@ -12,12 +12,17 @@ import { NAV_URLS } from '@/constants';
 
 export type ShowPageProps = {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ season?: string }>;
 };
 
-export type ShowDetailsProps = { params: Promise<{ id: string }> };
+export type ShowDetailsProps = {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ season?: string }>;
+};
 
-export async function ShowDetails({ params }: ShowDetailsProps) {
+export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
   const { id } = await params;
+  const { season: seasonParam } = await searchParams;
   const show = await getShowDetails(id);
 
   if (!show) {
@@ -39,9 +44,31 @@ export async function ShowDetails({ params }: ShowDetailsProps) {
   const availableSeasons = episodes.length
     ? [...new Set(episodes.map((ep) => ep.season))].sort((a, b) => a - b)
     : [];
+
+  const initialSeason = (() => {
+    if (seasonParam) {
+      const seasonNumber = Number(seasonParam);
+
+      if (availableSeasons.includes(seasonNumber)) {
+        return seasonNumber;
+      }
+    }
+
+    return availableSeasons[availableSeasons.length - 1] || 1;
+  })();
+
   // TODO: implement share functionality
   return (
     <>
+      <nav className="flex flex-wrap items-center gap-100 px-200 pb-300 text-sm">
+        <Link
+          href={NAV_URLS.home}
+          className="text-brand font-weight-medium flex items-center gap-50 text-sm hover:underline"
+        >
+          <span className="material-symbols-outlined text-sm">arrow_back</span> Back to Home
+        </Link>
+      </nav>
+
       <div className="mb-400 grid grid-cols-1 gap-400 px-200 md:grid-cols-[280px_1fr]">
         <div className="flex flex-col gap-200">
           <div className="bg-background-neutral shadow-raised rounded-radius-xlarge aspect-[2/3] w-full overflow-hidden">
@@ -117,7 +144,12 @@ export async function ShowDetails({ params }: ShowDetailsProps) {
           </div>
         </div>
       </div>
-      <EpisodesList showId={id} availableSeasons={availableSeasons} episodes={episodes} />
+      <EpisodesList
+        showId={id}
+        availableSeasons={availableSeasons}
+        episodes={episodes}
+        initialSeason={initialSeason}
+      />
     </>
   );
 }
@@ -156,10 +188,10 @@ export function ShowPageSkeleton() {
   );
 }
 
-export default function ShowPage({ params }: ShowPageProps) {
+export default function ShowPage({ params, searchParams }: ShowPageProps) {
   return (
     <Suspense fallback={<ShowPageSkeleton />}>
-      <ShowDetails params={params} />
+      <ShowDetails params={params} searchParams={searchParams} />
     </Suspense>
   );
 }

@@ -53,6 +53,8 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
           className="text-brand font-weight-medium text-sm hover:underline"
         >
           {episode._links.show.name}
+          <span className="text-text-subtlest font-weight-medium px-100">&gt;</span>
+          Season {episode.season}
         </Link>
       </nav>
 
