@@ -49,7 +49,7 @@ export default function EpisodesList({
   }
 
   return (
-    <section className="px-200">
+    <section className="w-full px-200">
       <div className="mb-300 flex items-center justify-between">
         <h3 className="text-text font-weight-bold text-2xl">Episodes</h3>
 
@@ -80,7 +80,7 @@ export default function EpisodesList({
                   >
                     Season {season}
                     {season === selectedSeason && (
-                      <span className="material-symbols-outlined ml-50 inline-block text-[16px]">
+                      <span className="material-symbols-outlined text-text float-right ml-50 inline-block text-[20px]">
                         check
                       </span>
                     )}

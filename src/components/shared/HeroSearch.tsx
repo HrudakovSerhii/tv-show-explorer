@@ -19,7 +19,7 @@ const HeroSearch: React.FC = () => {
 
       <div className="animate-fade-in z-10 mx-auto flex max-w-2xl flex-col gap-150">
         <h1
-          className="text-text-inverse text-4xl leading-tight font-black tracking-[-0.033em] md:text-5xl"
+          className="text-4xl leading-tight font-black tracking-[-0.033em] text-white md:text-5xl"
           style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }}
         >
           Discover your next obsession

@@ -40,7 +40,7 @@ const ShowCard: React.FC<ShowCardProps> = ({ show, onToggleWatchlist, isInWatchl
         )}
         <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10"></div>
 
-        <div className="shadow-overlay rounded-radius-small font-weight-bold text-text-inverse absolute top-100 right-100 flex items-center gap-50 bg-black/60 px-100 py-50 text-xs backdrop-blur-sm">
+        <div className="shadow-overlay rounded-radius-small font-weight-bold text-text absolute top-100 right-100 flex items-center gap-50 bg-black/60 px-100 py-50 text-xs backdrop-blur-sm">
           <span className="material-symbols-outlined text-icon-accent-yellow fill-current !text-[14px]">
             star
           </span>
@@ -55,8 +55,8 @@ const ShowCard: React.FC<ShowCardProps> = ({ show, onToggleWatchlist, isInWatchl
             }}
             className={`rounded-radius-full absolute right-100 bottom-100 p-100 backdrop-blur-md transition-all ${
               isInWatchlist
-                ? 'bg-background-brand-bold text-text-inverse'
-                : 'text-text-inverse bg-black/40 hover:bg-black/60'
+                ? 'bg-background-brand-bold text-text'
+                : 'text-text bg-black/40 hover:bg-black/60'
             }`}
           >
             <span className="material-symbols-outlined !text-[20px]">

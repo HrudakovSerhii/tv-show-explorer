@@ -28,7 +28,7 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
           </p>
           <Link
             href={`${NAV_URLS.show}/${id}`}
-            className="bg-background-brand-bold hover:bg-background-brand-bold-hovered text-text-inverse font-weight-medium rounded-radius-medium mt-100 px-200 py-100 text-sm transition-colors"
+            className="bg-background-brand-bold hover:bg-background-brand-bold-hovered text-text font-weight-medium rounded-radius-medium mt-100 px-200 py-100 text-sm transition-colors"
           >
             Browse TV Shows
           </Link>
@@ -45,7 +45,8 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
           href={NAV_URLS.home}
           className="text-brand font-weight-medium flex items-center gap-50 text-sm hover:underline"
         >
-          <span className="material-symbols-outlined text-sm">arrow_back</span> Back to Home
+          <span className="material-symbols-outlined">arrow_back</span>
+          <span className="truncate">Back to Home</span>
         </Link>
         <span className="text-text-subtlest font-weight-medium">&gt;</span>
         <Link
@@ -128,7 +129,7 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
 
           <div className="flex flex-col gap-200">
             <div className="flex flex-wrap gap-150">
-              <WatchlistButton showId={id} />
+              <WatchlistButton showId={episodeId} type="episode" />
               <button className="border-border hover:bg-background-neutral-subtle-hovered text-text font-weight-medium rounded-radius-medium flex items-center justify-center gap-100 border px-150 py-100 text-sm transition-colors">
                 <span className="material-symbols-outlined text-[20px]">share</span>
               </button>
@@ -140,7 +141,7 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
           <div className="flex flex-col gap-150">
             <h3 className="text-text font-weight-bold text-lg">Overview</h3>
             <p className="text-text-subtle font-weight-regular text-base leading-relaxed">
-              {stripHtml(episode.summary)}
+              {episode?.summary ? stripHtml(episode.summary) : 'Not Available'}
             </p>
           </div>
         </div>
