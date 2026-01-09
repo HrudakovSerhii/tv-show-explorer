@@ -363,7 +363,6 @@ describe('Show Page', () => {
 
     describe('Async Flow and Core Logic', () => {
       it('should handle full async data fetching flow with initialSeason calculation', async () => {
-
         const mockShowMultiSeasons: Show = {
           ...mockShowDetails,
           summary: '<p>Test <strong>summary</strong> with HTML tags</p>',

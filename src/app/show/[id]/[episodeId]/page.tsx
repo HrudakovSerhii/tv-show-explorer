@@ -39,7 +39,6 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
 
   return (
     <div className="animate-fade-in mx-auto flex w-full max-w-[1200px] flex-col">
-      {/* Breadcrumb Navigation */}
       <nav className="flex flex-wrap items-center gap-100 px-200 pb-300 text-sm">
         <Link
           href={NAV_URLS.home}
