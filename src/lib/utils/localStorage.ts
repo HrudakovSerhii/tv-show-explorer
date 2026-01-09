@@ -1,136 +1,84 @@
 /**
- * Local Storage utility for managing application data
+ * Local Storage utility for managing watchlist and theme
  */
 
-export const WATCHLIST_KEY = 'tv-show-watchlist';
-export const THEME_KEY = 'tv-show-theme';
+const WATCHLIST_KEY = 'tv-show-watchlist';
+const THEME_KEY = 'tv-show-theme';
 
-export type WatchlistItem = {
+type WatchlistItem = {
   id: string | number;
   addedAt: string;
 };
 
-export function getItem<T>(key: string): T | null {
-  if (typeof window === 'undefined') return null;
-
-  try {
-    const stored = localStorage.getItem(key);
-    return stored ? JSON.parse(stored) : null;
-  } catch (error) {
-    console.error(`Failed to get item "${key}" from localStorage:`, error);
-    return null;
-  }
-}
-
-export function setItem<T>(key: string, value: T): boolean {
-  if (typeof window === 'undefined') return false;
-
-  try {
-    localStorage.setItem(key, JSON.stringify(value));
-    return true;
-  } catch (error) {
-    console.error(`Failed to set item "${key}" in localStorage:`, error);
-    return false;
-  }
-}
-
-export function removeItem(key: string): boolean {
-  if (typeof window === 'undefined') return false;
-
-  try {
-    localStorage.removeItem(key);
-    return true;
-  } catch (error) {
-    console.error(`Failed to remove item "${key}" from localStorage:`, error);
-    return false;
-  }
-}
-
-export function hasItem(key: string): boolean {
-  if (typeof window === 'undefined') return false;
-
-  try {
-    return localStorage.getItem(key) !== null;
-  } catch (error) {
-    console.error(`Failed to check item "${key}" in localStorage:`, error);
-    return false;
-  }
-}
-
-export function clearAll(): void {
-  if (typeof window === 'undefined') return;
-
-  try {
-    localStorage.clear();
-  } catch (error) {
-    console.error('Failed to clear localStorage:', error);
-  }
-}
-
 /**
- * Watchlist-Specific Functions
+ * Watchlist Functions
  */
 
-export function getWatchlist(): WatchlistItem[] {
-  return getItem<WatchlistItem[]>(WATCHLIST_KEY) || [];
-}
-
 export function isInWatchlist(showId: string | number): boolean {
-  const watchlist = getWatchlist();
-  return watchlist.some((item) => String(item.id) === String(showId));
-}
+  if (typeof window === 'undefined') return false;
 
-export function addToWatchlist(showId: string | number): boolean {
-  const watchlist = getWatchlist();
+  try {
+    const stored = localStorage.getItem(WATCHLIST_KEY);
+    const watchlist: WatchlistItem[] = stored ? JSON.parse(stored) : [];
 
-  if (isInWatchlist(showId)) {
+    return watchlist.some((item) => String(item.id) === String(showId));
+  } catch {
     return false;
   }
-
-  const newItem: WatchlistItem = {
-    id: showId,
-    addedAt: new Date().toISOString(),
-  };
-
-  const updatedWatchlist = [...watchlist, newItem];
-  return setItem(WATCHLIST_KEY, updatedWatchlist);
-}
-
-export function removeFromWatchlist(showId: string | number): boolean {
-  const watchlist = getWatchlist();
-  const filteredWatchlist = watchlist.filter((item) => String(item.id) !== String(showId));
-
-  return setItem(WATCHLIST_KEY, filteredWatchlist);
 }
 
 export function toggleWatchlist(showId: string | number): boolean {
-  if (isInWatchlist(showId)) {
-    removeFromWatchlist(showId);
+  if (typeof window === 'undefined') return false;
+
+  try {
+    const stored = localStorage.getItem(WATCHLIST_KEY);
+    const watchlist: WatchlistItem[] = stored ? JSON.parse(stored) : [];
+    const isInList = watchlist.some((item) => String(item.id) === String(showId));
+
+    if (isInList) {
+      const filtered = watchlist.filter((item) => String(item.id) !== String(showId));
+      localStorage.setItem(WATCHLIST_KEY, JSON.stringify(filtered));
+
+      return false;
+    } else {
+      const newItem: WatchlistItem = { id: showId, addedAt: new Date().toISOString() };
+      localStorage.setItem(WATCHLIST_KEY, JSON.stringify([...watchlist, newItem]));
+
+      return true;
+    }
+  } catch (error) {
+    console.error('Failed to toggle watchlist:', error);
+
     return false;
-  } else {
-    addToWatchlist(showId);
-    return true;
   }
 }
 
-export function clearWatchlist(): void {
-  removeItem(WATCHLIST_KEY);
-}
-
 /**
- * Theme-Specific Functions
+ * Theme Functions
  */
 
 export type ThemeMode = 'light' | 'dark';
 
 export function getTheme(): ThemeMode {
-  return getItem<ThemeMode>(THEME_KEY) || 'dark';
+  if (typeof window === 'undefined') return 'dark';
+
+  try {
+    const stored = localStorage.getItem(THEME_KEY);
+
+    return stored ? (JSON.parse(stored) as ThemeMode) : 'dark';
+  } catch {
+    return 'dark';
+  }
 }
 
 export function setTheme(theme: ThemeMode): boolean {
-  return setItem(THEME_KEY, theme);
-}
+  if (typeof window === 'undefined') return false;
 
-export function clearTheme(): void {
-  removeItem(THEME_KEY);
+  try {
+    localStorage.setItem(THEME_KEY, JSON.stringify(theme));
+    return true;
+  } catch (error) {
+    console.error('Failed to set theme:', error);
+    return false;
+  }
 }

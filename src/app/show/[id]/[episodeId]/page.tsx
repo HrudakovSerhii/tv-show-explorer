@@ -1,6 +1,11 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
 
+import { RatingControlSkeleton } from '@/components/shared/RatingControl';
+
+import FavoriteButton from '@/components/shows/FavoriteButton';
+import UserRatingButton from '@/components/shows/UserRatingButton';
+import ShareButton from '@/components/shared/ShareButton';
 import WatchlistButton from '@/components/shows/WatchlistButton';
 
 import { getEpisodeDetails } from '@/lib/api/tvmaze';
@@ -97,7 +102,7 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
         </div>
 
         <div className="flex flex-col gap-300 text-left lg:col-span-7">
-          <div className="flex flex-col gap-100">
+          <div className="flex flex-col gap-200">
             <div className="flex items-center gap-150">
               <span className="bg-background-brand-bold/10 text-brand rounded-radius-small font-weight-bold inline-flex items-center px-100 py-50 text-xs">
                 Season {episode.season}
@@ -119,12 +124,39 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
             </h1>
           </div>
 
+          <div className="mb-50">
+            <Suspense fallback={<RatingControlSkeleton label="Rate this episode" />}>
+              <UserRatingButton
+                id={episodeId}
+                type="episode"
+                label="Rate this episode"
+                metadata={{
+                  showName: episode._links.show.name,
+                  episodeName: episode.name,
+                  season: episode.season,
+                  number: episode.number,
+                }}
+              />
+            </Suspense>
+          </div>
+
           <div className="flex flex-col gap-200">
             <div className="flex flex-wrap gap-150">
               <WatchlistButton id={episodeId} type="episode" />
-              <button className="border-border hover:bg-background-neutral-subtle-hovered text-text font-weight-medium rounded-radius-medium flex items-center justify-center gap-100 border px-150 py-100 text-sm transition-colors">
-                <span className="material-symbols-outlined text-[20px]">share</span>
-              </button>
+              <FavoriteButton
+                id={episodeId}
+                type="episode"
+                metadata={{
+                  showName: episode._links.show.name,
+                  episodeName: episode.name,
+                  season: episode.season,
+                  number: episode.number,
+                }}
+              />
+              <ShareButton
+                title={`${episode._links.show.name} - ${episode.name}`}
+                text={`Check out S${episode.season}E${episode.number}: ${episode.name} from ${episode._links.show.name}`}
+              />
             </div>
           </div>
 

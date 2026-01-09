@@ -4,26 +4,12 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
-  plugins: [
-    react({
-      // Don't use babel for vitest - use esbuild instead
-      babel: false,
-    }),
-  ],
+  plugins: [react()],
   test: {
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.tsx'],
-    include: [
-      'src/**/*.{test,spec}.{ts,tsx}',
-      '__tests__/**/*.{test,spec}.{ts,tsx}',
-    ],
-    exclude: [
-      'node_modules',
-      '.next',
-      'out',
-      'build',
-      'dist',
-    ],
+    include: ['src/**/*.{test,spec}.{ts,tsx}', '__tests__/**/*.{test,spec}.{ts,tsx}'],
+    exclude: ['node_modules', '.next', 'out', 'build', 'dist'],
     testTimeout: 10000,
     globals: true,
     coverage: {

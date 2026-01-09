@@ -1,8 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
 import { isInWatchlist, toggleWatchlist } from '@/lib/utils/localStorage';
+import { useToggleState } from '@/hooks/useToggleState';
 
 type WatchlistButtonProps = {
   id: string | number;
@@ -10,21 +9,17 @@ type WatchlistButtonProps = {
 };
 
 export default function WatchlistButton({ id, type = 'show' }: WatchlistButtonProps) {
-  const [inWatchlist, setInWatchlist] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
   const prefixedId = `${type}-${id}`;
 
-  useEffect(() => {
-    setInWatchlist(isInWatchlist(prefixedId));
-    setIsLoading(false);
-  }, [prefixedId]);
-
-  const handleToggle = () => {
-    const newStatus = toggleWatchlist(prefixedId);
-
-    setInWatchlist(newStatus);
-  };
+  const {
+    isActive: inWatchlist,
+    isLoading,
+    handleToggle,
+  } = useToggleState<boolean>({
+    checkStatus: () => isInWatchlist(prefixedId),
+    onToggle: () => toggleWatchlist(prefixedId),
+    dependencies: [prefixedId],
+  });
 
   if (isLoading) {
     return (
@@ -41,14 +36,14 @@ export default function WatchlistButton({ id, type = 'show' }: WatchlistButtonPr
   return (
     <button
       onClick={handleToggle}
-      className={`rounded-radius-large font-weight-bold flex flex-1 items-center justify-center gap-100 p-150 transition-colors ${
+      className={`rounded-radius-large font-weight-bold flex flex-1 items-center justify-center gap-100 p-150 text-center transition-colors ${
         inWatchlist
           ? 'bg-background-brand-bold text-text hover:bg-background-brand-bold-hovered'
           : 'bg-background-neutral text-text hover:bg-background-neutral-hovered'
       }`}
     >
       <span className="material-symbols-outlined">{inWatchlist ? 'check' : 'add'}</span>
-      {inWatchlist ? 'In Watchlist' : 'Add to Watchlist'}
+      {inWatchlist ? 'In Your Watchlist!' : 'Add to Watchlist'}
     </button>
   );
 }
