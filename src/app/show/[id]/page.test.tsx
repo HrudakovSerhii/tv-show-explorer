@@ -22,8 +22,8 @@ vi.mock('@/lib/utils/format', () => ({
 
 // Mock child components
 vi.mock('@/components/shows/WatchlistButton', () => ({
-  default: ({ showId }: { showId: string | number }) => (
-    <div data-testid="watchlist-button" data-show-id={showId}>
+  default: ({ id, type }: { id: string | number; type: string }) => (
+    <div data-testid="watchlist-button" data-show-id={id} data-type={type}>
       WatchlistButton
     </div>
   ),
@@ -34,16 +34,19 @@ vi.mock('@/components/shows/EpisodesList', () => ({
     showId,
     availableSeasons,
     episodes,
+    initialSeason,
   }: {
     showId: string;
     availableSeasons: number[];
     episodes: any[];
+    initialSeason?: number;
   }) => (
     <div
       data-testid="episodes-list"
       data-show-id={showId}
       data-seasons={JSON.stringify(availableSeasons)}
       data-episodes-count={episodes.length}
+      data-initial-season={initialSeason}
     >
       EpisodesList
     </div>
@@ -80,6 +83,7 @@ describe('Show Page', () => {
         const { container } = await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
@@ -114,6 +118,7 @@ describe('Show Page', () => {
         await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
@@ -147,6 +152,7 @@ describe('Show Page', () => {
         await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
@@ -163,6 +169,7 @@ describe('Show Page', () => {
         await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
@@ -177,6 +184,7 @@ describe('Show Page', () => {
         const { container } = await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
@@ -198,6 +206,7 @@ describe('Show Page', () => {
         await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '999999' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
@@ -219,6 +228,7 @@ describe('Show Page', () => {
         await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '999999' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
@@ -243,6 +253,7 @@ describe('Show Page', () => {
         await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
@@ -266,6 +277,7 @@ describe('Show Page', () => {
         await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
@@ -286,17 +298,16 @@ describe('Show Page', () => {
 
         vi.mocked(getShowDetails).mockResolvedValue(mockShowNoCast);
 
-        const { container } = await renderAsync(
+        await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
         // Verify N/A is displayed in cast section
-        const castSection = container.querySelector(
-          'p.text-text.dark\\:text-text-inverse.font-weight-medium',
-        );
-        expect(castSection).toHaveTextContent('N/A');
+        expect(screen.getByText('Stars')).toBeInTheDocument();
+        expect(screen.getByText('N/A')).toBeInTheDocument();
       });
 
       it('should handle show with empty genres array', async () => {
@@ -310,11 +321,12 @@ describe('Show Page', () => {
         const { container } = await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
-        // Verify no genre badges are rendered
-        const genreBadges = container.querySelectorAll('.text-brand');
+        // Verify no genre badges are rendered (look for badges with rounded corners which are genre-specific)
+        const genreBadges = container.querySelectorAll('.rounded-radius-full');
         expect(genreBadges).toHaveLength(0);
       });
 
@@ -329,6 +341,7 @@ describe('Show Page', () => {
         await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
@@ -367,6 +380,7 @@ describe('Show Page', () => {
         await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
@@ -384,6 +398,7 @@ describe('Show Page', () => {
         await renderAsync(
           ShowDetails({
             params: Promise.resolve({ id: '169' }),
+            searchParams: Promise.resolve({ season: '169' }),
           }),
         );
 
