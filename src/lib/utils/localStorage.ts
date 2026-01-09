@@ -106,9 +106,11 @@ export function removeFromWatchlist(showId: string | number): boolean {
 export function toggleWatchlist(showId: string | number): boolean {
   if (isInWatchlist(showId)) {
     removeFromWatchlist(showId);
+
     return false;
   } else {
     addToWatchlist(showId);
+
     return true;
   }
 }
