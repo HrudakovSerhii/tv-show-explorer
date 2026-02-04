@@ -26,12 +26,12 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
 
   if (!episode) {
     return (
-      <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center justify-center p-400">
+      <div className="mx-auto flex w-full flex-col items-center justify-center p-400">
         <div className="bg-background-neutral-subtle rounded-radius-xlarge flex flex-col items-center gap-200 p-600 text-center">
           <span className="text-icon-subtlest material-symbols-outlined text-6xl">tv_off</span>
           <h1 className="text-text font-weight-bold text-2xl">Episode not found</h1>
           <p className="text-text-subtle text-sm">
-            The episode you're looking for doesn't exist or has been removed.
+            The episode you&#39;re looking for doesn&#39;t exist or has been removed.
           </p>
           <Link
             href={`${NAV_URLS.show}/${id}`}
@@ -167,7 +167,7 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
 
 function EpisodePageSkeleton() {
   return (
-    <div className="mx-auto flex w-full max-w-[1200px] animate-pulse flex-col">
+    <div className="mx-auto flex w-full animate-pulse flex-col">
       <div className="mb-100 flex flex-col-reverse justify-between gap-200 py-200 md:flex-row md:items-center">
         <div className="bg-background-neutral rounded-radius-medium h-10 w-48" />
         <div className="flex flex-wrap items-center gap-100 px-200 md:px-0">

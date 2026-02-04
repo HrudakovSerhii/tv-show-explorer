@@ -7,7 +7,7 @@ import FooterCurrentDate from '@/components/shared/FooterCurrentDate';
 export default function Footer() {
   return (
     <footer className="border-border bg-background-input mt-400 w-full border-t">
-      <div className="mx-auto flex max-w-[960px] flex-col gap-200 px-250 py-200 text-center">
+      <div className="mx-auto flex flex-col gap-200 px-250 py-200 text-center">
         <div className="flex flex-wrap items-center justify-center gap-200">
           <Link
             className="text-text-subtlest hover:text-icon-accent-blue min-w-40 text-base leading-normal font-normal transition-colors"

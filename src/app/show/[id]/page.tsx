@@ -120,7 +120,7 @@ export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-150">
+          <div className="mb-200 flex flex-wrap gap-150">
             <WatchlistButton id={show.id} type="show" />
             <FavoriteButton id={show.id} type="show" metadata={{ showName: show.name }} />
             <ShareButton title={show.name} text={`Check out ${show.name} on TV Show Explorer`} />
