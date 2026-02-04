@@ -123,6 +123,17 @@ describe('Favorites Actions', () => {
       expect(result.success).toBe(false);
       expect(result.error).toBe('File read error');
     });
+
+    it('should return error when rate limited', async () => {
+      mockIsRateLimited.mockReturnValue(true);
+
+      const result = await toggleFavorite(123, 'show');
+
+      expect(result.success).toBe(false);
+      expect(result.error).toBe('Rate limit exceeded. Please try again later.');
+      expect(mockReadFavoritesFile).not.toHaveBeenCalled();
+      expect(mockWriteFavoritesFile).not.toHaveBeenCalled();
+    });
   });
 
   describe('isInFavorite', () => {
@@ -234,6 +245,17 @@ describe('Favorites Actions', () => {
 
       expect(result.success).toBe(false);
       expect(result.error).toBe('File read error');
+    });
+
+    it('should return error when rate limited', async () => {
+      mockIsRateLimited.mockReturnValue(true);
+
+      const result = await updateFavoriteRating(123, 'show', 10);
+
+      expect(result.success).toBe(false);
+      expect(result.error).toBe('Rate limit exceeded. Please try again later.');
+      expect(mockReadFavoritesFile).not.toHaveBeenCalled();
+      expect(mockWriteFavoritesFile).not.toHaveBeenCalled();
     });
   });
 
