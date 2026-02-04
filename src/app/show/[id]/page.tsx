@@ -5,13 +5,15 @@ import Image from 'next/image';
 import { getShowDetails } from '@/lib/api/tvmaze';
 import { stripHtml } from '@/lib/utils/format';
 
+import { RatingControlSkeleton } from '@/components/shared/RatingControl';
+import BreadcrumbsNavigation from '@/components/shared/BreadcrumbsNavigation';
+import ShareButton from '@/components/shared/ShareButton';
+
 import EpisodeListCard from '@/components/shows/EpisodeListCard';
 import EpisodesList from '@/components/shows/EpisodesList';
 import FavoriteButton from '@/components/shows/FavoriteButton';
 import UserRatingButton from '@/components/shows/UserRatingButton';
-import ShareButton from '@/components/shared/ShareButton';
 import WatchlistButton from '@/components/shows/WatchlistButton';
-import { RatingControlSkeleton } from '@/components/shared/RatingControl';
 
 import { NAV_URLS } from '@/constants';
 
@@ -65,19 +67,11 @@ export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
   // TODO: implement share functionality
   return (
     <>
-      <nav className="flex flex-wrap items-center gap-100 px-200 pb-300">
-        <Link
-          href={NAV_URLS.home}
-          className="text-brand font-weight-medium flex items-center gap-50 hover:underline"
-        >
-          <span className="material-symbols-outlined">arrow_back</span>
-          <span className="truncate text-sm">Back to Home</span>
-        </Link>
-      </nav>
+      <BreadcrumbsNavigation />
 
       <div className="mb-400 grid grid-cols-1 gap-400 md:grid-cols-[280px_1fr]">
         <div className="flex flex-col gap-200">
-          <div className="bg-background-neutral shadow-raised rounded-radius-xlarge aspect-[2/3] w-full overflow-hidden">
+          <div className="bg-background-neutral shadow-raised rounded-radius-xlarge relative aspect-[2/3] w-full overflow-hidden">
             {show.image?.original ? (
               <Image
                 src={show.image.original}
@@ -126,7 +120,7 @@ export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-150">
+          <div className="mb-200 flex flex-wrap gap-150">
             <WatchlistButton id={show.id} type="show" />
             <FavoriteButton id={show.id} type="show" metadata={{ showName: show.name }} />
             <ShareButton title={show.name} text={`Check out ${show.name} on TV Show Explorer`} />
