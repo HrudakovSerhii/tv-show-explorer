@@ -1,17 +1,17 @@
 import { cacheLife } from 'next/cache';
 
 import { formatErrorMessage, createApiStatusError } from './error-utils';
+import { TVMAZE_API_BASE_URL } from '@/constants';
+import { log } from '@/lib/utils/logger';
 
 import type { Show, Episode, ScheduleEpisode, Season } from '@/types/api-types';
-
-const BASE_URL = 'https://api.tvmaze.com';
 
 export async function searchShows(query: string): Promise<Show[]> {
   'use cache';
   cacheLife('search');
 
   try {
-    const response = await fetch(`${BASE_URL}/search/shows?q=${encodeURIComponent(query)}`);
+    const response = await fetch(`${TVMAZE_API_BASE_URL}/search/shows?q=${encodeURIComponent(query)}`);
 
     if (!response.ok) {
       throw createApiStatusError('Search failed with status', response.status);
@@ -20,7 +20,7 @@ export async function searchShows(query: string): Promise<Show[]> {
     const data = await response.json();
     return data.map((item: { show: Show }) => item.show);
   } catch (error) {
-    console.error(formatErrorMessage('Search failed:', error));
+    log.error(formatErrorMessage('Search failed:', error));
     return [];
   }
 }
@@ -30,7 +30,7 @@ export async function getShowDetails(id: string | number): Promise<Show | null> 
   cacheLife('show');
 
   try {
-    const response = await fetch(`${BASE_URL}/shows/${id}?embed[]=episodes&embed[]=cast`);
+    const response = await fetch(`${TVMAZE_API_BASE_URL}/shows/${id}?embed[]=episodes&embed[]=cast`);
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -41,7 +41,7 @@ export async function getShowDetails(id: string | number): Promise<Show | null> 
 
     return await response.json();
   } catch (error) {
-    console.error(formatErrorMessage('Fetching show details failed:', error));
+    log.error(formatErrorMessage('Fetching show details failed:', error));
     return null;
   }
 }
@@ -51,7 +51,7 @@ export async function getEpisodeDetails(id: string | number): Promise<Episode | 
   cacheLife('episode');
 
   try {
-    const response = await fetch(`${BASE_URL}/episodes/${id}`);
+    const response = await fetch(`${TVMAZE_API_BASE_URL}/episodes/${id}`);
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -62,7 +62,7 @@ export async function getEpisodeDetails(id: string | number): Promise<Episode | 
 
     return await response.json();
   } catch (error) {
-    console.error(formatErrorMessage('Fetching episode details failed:', error));
+    log.error(formatErrorMessage('Fetching episode details failed:', error));
     return null;
   }
 }
@@ -83,7 +83,7 @@ export async function getWebSchedule(options?: {
       params.set('date', options.date);
     }
 
-    const url = `${BASE_URL}/schedule/web${params.toString() ? `?${params.toString()}` : ''}`;
+    const url = `${TVMAZE_API_BASE_URL}/schedule/web${params.toString() ? `?${params.toString()}` : ''}`;
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -92,7 +92,7 @@ export async function getWebSchedule(options?: {
 
     return await response.json();
   } catch (error) {
-    console.error(formatErrorMessage('Fetching web schedule failed:', error));
+    log.error(formatErrorMessage('Fetching web schedule failed:', error));
     return [];
   }
 }
@@ -102,7 +102,7 @@ export async function getShowSeasons(id: string | number): Promise<Array<Season>
   cacheLife('season');
 
   try {
-    const response = await fetch(`${BASE_URL}/shows/${id}/seasons`);
+    const response = await fetch(`${TVMAZE_API_BASE_URL}/shows/${id}/seasons`);
 
     if (!response.ok) {
       throw createApiStatusError(`Failed to fetch show ${id} seasons`, response.status);
@@ -110,7 +110,7 @@ export async function getShowSeasons(id: string | number): Promise<Array<Season>
 
     return await response.json();
   } catch (error) {
-    console.error(formatErrorMessage('Fetching show seasons failed:', error));
+    log.error(formatErrorMessage('Fetching show seasons failed:', error));
     return null;
   }
 }

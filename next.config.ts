@@ -1,5 +1,19 @@
 import type { NextConfig } from 'next';
 
+async function headers() {
+  return [
+    {
+      source: '/:path*',
+      headers: [
+        {
+          key: 'Content-Security-Policy',
+          value: "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://static.tvmaze.com https://images.unsplash.com; connect-src 'self'; frame-ancestors 'none';",
+        },
+      ],
+    },
+  ];
+}
+
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
@@ -64,6 +78,7 @@ const nextConfig: NextConfig = {
   },
   // If you use CSS extraction, you might need to ensure Next.js handles the generic CSS
   // usually, Next.js handles extracted .css files automatically if they are imported.
+  headers,
 };
 
 export default nextConfig;

@@ -2,7 +2,11 @@ import fs from 'fs/promises';
 import path from 'path';
 
 import type { FavoritesData } from '@/types/favorites';
+import { log } from '@/lib/utils/logger';
 
+// TODO: File-based storage is single-user only. For multi-user support,
+// replace with a database (e.g., SQLite via better-sqlite3, or a cloud DB).
+// Concurrent writes from multiple users will cause data loss.
 const DATA_DIR = path.join(process.cwd(), 'data');
 const FAVORITES_FILE = path.join(DATA_DIR, 'favorites.json');
 const TEMP_FILE = path.join(DATA_DIR, 'favorites.json.tmp');
@@ -47,7 +51,7 @@ export async function readFavoritesFile(): Promise<FavoritesData> {
       throw error;
     }
   } catch (error) {
-    console.error('Error reading favorites file:', error);
+    log.error('Error reading favorites file:', error);
 
     return createDefaultFavoritesData();
   }
@@ -67,12 +71,12 @@ export async function writeFavoritesFile(data: FavoritesData): Promise<void> {
     await fs.writeFile(TEMP_FILE, jsonContent, 'utf-8');
     await fs.rename(TEMP_FILE, FAVORITES_FILE);
   } catch (error) {
-    console.error('Error writing favorites file:', error);
+    log.error('Error writing favorites file:', error);
 
     try {
       await fs.unlink(TEMP_FILE);
     } catch (cleanupError) {
-      console.warn('File cleanup error:', cleanupError);
+      log.warn('File cleanup error:', cleanupError);
     }
 
     throw error;

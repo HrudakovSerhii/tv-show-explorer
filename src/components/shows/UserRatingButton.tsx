@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 
 import RatingControl, { RatingControlSkeleton } from '@/components/shared/RatingControl';
+import { log } from '@/lib/utils/logger';
 
 import { getFavoriteRating, updateFavoriteRating } from '@/app/actions/favorites';
 
@@ -47,7 +48,7 @@ export default function UserRatingButton({
     const result = await updateFavoriteRating(id, type, newRating, metadata);
 
     if (!result.success) {
-      console.error('Failed to save rating:', result.error);
+      log.error('Failed to save rating:', result.error);
       // Rollback on error
       setRating(previousRating);
     }

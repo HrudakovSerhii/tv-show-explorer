@@ -2,6 +2,8 @@
  * Local Storage utility for managing watchlist and theme
  */
 
+import { log } from '@/lib/utils/logger';
+
 const WATCHLIST_KEY = 'tv-show-watchlist';
 const THEME_KEY = 'tv-show-theme';
 
@@ -47,7 +49,7 @@ export function toggleWatchlist(showId: string | number): boolean {
       return true;
     }
   } catch (error) {
-    console.error('Failed to toggle watchlist:', error);
+    log.error('Failed to toggle watchlist:', error);
 
     return false;
   }
@@ -78,7 +80,7 @@ export function setTheme(theme: ThemeMode): boolean {
     localStorage.setItem(THEME_KEY, JSON.stringify(theme));
     return true;
   } catch (error) {
-    console.error('Failed to set theme:', error);
+    log.error('Failed to set theme:', error);
     return false;
   }
 }
