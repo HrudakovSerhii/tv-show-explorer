@@ -77,7 +77,7 @@ export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
 
       <div className="mb-400 grid grid-cols-1 gap-400 md:grid-cols-[280px_1fr]">
         <div className="flex flex-col gap-200">
-          <div className="bg-background-neutral shadow-raised rounded-radius-xlarge aspect-[2/3] w-full overflow-hidden">
+          <div className="bg-background-neutral shadow-raised rounded-radius-xlarge relative aspect-[2/3] w-full overflow-hidden">
             {show.image?.original ? (
               <Image
                 src={show.image.original}
