@@ -2,8 +2,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { searchShows } from '@/lib/api/tvmaze';
-
-import ShowCard from '@/components/shows/ShowCard';
+import ClientWebSchedule from '@/components/schedule/ClientWebSchedule';
 
 import { NAV_URLS } from '@/constants';
 
@@ -37,11 +36,7 @@ async function SearchResults({ params }: { params: Promise<{ query: string }> })
         </div>
       )}
 
-      <div className="grid grid-cols-2 gap-300 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-        {results.map((show) => (
-          <ShowCard key={show.id} show={show} />
-        ))}
-      </div>
+      {results.length > 0 && <ClientWebSchedule shows={results} />}
     </>
   );
 }

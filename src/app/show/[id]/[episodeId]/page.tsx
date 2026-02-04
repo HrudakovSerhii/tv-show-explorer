@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { RatingControlSkeleton } from '@/components/shared/RatingControl';
 
@@ -67,19 +68,14 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
         <div className="flex flex-col gap-200 lg:col-span-5">
           <div className="bg-background-neutral-subtle rounded-radius-xlarge shadow-raised group relative aspect-video w-full overflow-hidden">
             {episode.image?.medium || episode.image?.original ? (
-              <picture className="absolute inset-0">
-                {episode.image.original && (
-                  <source media="(min-width: 640px)" srcSet={episode.image.original} />
-                )}
-                {episode.image.medium && (
-                  <source media="(max-width: 639px)" srcSet={episode.image.medium} />
-                )}
-                <img
-                  src={episode.image.medium || episode.image.original}
-                  alt={episode.name}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </picture>
+              <Image
+                src={episode.image.medium || episode.image.original!}
+                alt={episode.name}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 500px"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
             ) : (
               <div className="flex h-full w-full items-center justify-center">
                 <span className="text-icon-subtle material-symbols-outlined text-6xl">tv</span>

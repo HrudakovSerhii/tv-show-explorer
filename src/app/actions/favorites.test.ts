@@ -16,17 +16,29 @@ vi.mock('next/cache', () => ({
   revalidatePath: vi.fn(),
 }));
 
+vi.mock('next/headers', () => ({
+  headers: vi.fn(),
+}));
+
 vi.mock('@/lib/utils/fileStorage', () => ({
   readFavoritesFile: vi.fn(),
   writeFavoritesFile: vi.fn(),
 }));
 
+vi.mock('@/lib/utils/rateLimiter', () => ({
+  isRateLimited: vi.fn(),
+}));
+
 const { readFavoritesFile, writeFavoritesFile } = await import('@/lib/utils/fileStorage');
 const { revalidatePath } = await import('next/cache');
+const { headers } = await import('next/headers');
+const { isRateLimited } = await import('@/lib/utils/rateLimiter');
 
 const mockReadFavoritesFile = readFavoritesFile as ReturnType<typeof vi.fn>;
 const mockWriteFavoritesFile = writeFavoritesFile as ReturnType<typeof vi.fn>;
 const mockRevalidatePath = revalidatePath as ReturnType<typeof vi.fn>;
+const mockHeaders = headers as ReturnType<typeof vi.fn>;
+const mockIsRateLimited = isRateLimited as ReturnType<typeof vi.fn>;
 
 describe('Favorites Actions', () => {
   const mockEmptyData: FavoritesData = {
@@ -38,6 +50,10 @@ describe('Favorites Actions', () => {
     vi.clearAllMocks();
     mockReadFavoritesFile.mockResolvedValue(mockEmptyData);
     mockWriteFavoritesFile.mockResolvedValue(undefined);
+    mockIsRateLimited.mockReturnValue(false);
+    mockHeaders.mockResolvedValue({
+      get: vi.fn().mockReturnValue(null),
+    });
   });
 
   afterEach(() => {
@@ -106,6 +122,17 @@ describe('Favorites Actions', () => {
 
       expect(result.success).toBe(false);
       expect(result.error).toBe('File read error');
+    });
+
+    it('should return error when rate limited', async () => {
+      mockIsRateLimited.mockReturnValue(true);
+
+      const result = await toggleFavorite(123, 'show');
+
+      expect(result.success).toBe(false);
+      expect(result.error).toBe('Rate limit exceeded. Please try again later.');
+      expect(mockReadFavoritesFile).not.toHaveBeenCalled();
+      expect(mockWriteFavoritesFile).not.toHaveBeenCalled();
     });
   });
 
@@ -218,6 +245,17 @@ describe('Favorites Actions', () => {
 
       expect(result.success).toBe(false);
       expect(result.error).toBe('File read error');
+    });
+
+    it('should return error when rate limited', async () => {
+      mockIsRateLimited.mockReturnValue(true);
+
+      const result = await updateFavoriteRating(123, 'show', 10);
+
+      expect(result.success).toBe(false);
+      expect(result.error).toBe('Rate limit exceeded. Please try again later.');
+      expect(mockReadFavoritesFile).not.toHaveBeenCalled();
+      expect(mockWriteFavoritesFile).not.toHaveBeenCalled();
     });
   });
 

@@ -15,7 +15,7 @@ export default function WatchlistButton({ id, type = 'show' }: WatchlistButtonPr
     isActive: inWatchlist,
     isLoading,
     handleToggle,
-  } = useToggleState<boolean>({
+  } = useToggleState({
     checkStatus: () => isInWatchlist(prefixedId),
     onToggle: () => toggleWatchlist(prefixedId),
     dependencies: [prefixedId],

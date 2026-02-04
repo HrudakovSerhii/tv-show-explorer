@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import { log } from '@/lib/utils/logger';
+
 type ShareButtonProps = {
   title: string;
   text?: string;
@@ -23,7 +25,7 @@ export default function ShareButton({ title, text, url }: ShareButtonProps) {
         await navigator.share(shareData);
       } catch (error) {
         if ((error as Error).name !== 'AbortError') {
-          console.error('Error sharing:', error);
+          log.error('Error sharing:', error);
 
           await fallbackCopyToClipboard(shareData.url);
         }
@@ -40,7 +42,7 @@ export default function ShareButton({ title, text, url }: ShareButtonProps) {
       setShowCopied(true);
       setTimeout(() => setShowCopied(false), 2000);
     } catch (error) {
-      console.error('Failed to copy to clipboard:', error);
+      log.error('Failed to copy to clipboard:', error);
     }
   };
 
