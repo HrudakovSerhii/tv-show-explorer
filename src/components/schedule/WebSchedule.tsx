@@ -1,11 +1,12 @@
 import { getWebSchedule } from '@/lib/api/tvmaze';
+import { DEFAULT_SCHEDULE_COUNTRY } from '@/constants';
 
-import ShowCard from '@/components/shows/ShowCard';
+import ClientWebSchedule from '@/components/schedule/ClientWebSchedule';
 
 import type { Show } from '@/types/api-types';
 
 export default async function WebSchedule() {
-  const schedule = await getWebSchedule({ country: 'NL' });
+  const schedule = await getWebSchedule({ country: DEFAULT_SCHEDULE_COUNTRY });
 
   const uniqueShows = schedule
     .filter((episode) => episode._embedded?.show)
@@ -28,11 +29,5 @@ export default async function WebSchedule() {
     );
   }
 
-  return (
-    <div className="grid grid-cols-2 gap-300 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-      {uniqueShows.map((show) => (
-        <ShowCard key={show.id} show={show} />
-      ))}
-    </div>
-  );
+  return <ClientWebSchedule shows={uniqueShows} />;
 }

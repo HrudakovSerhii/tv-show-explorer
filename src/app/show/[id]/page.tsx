@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { getShowDetails } from '@/lib/api/tvmaze';
 import { stripHtml } from '@/lib/utils/format';
@@ -78,17 +79,14 @@ export async function ShowDetails({ params, searchParams }: ShowDetailsProps) {
         <div className="flex flex-col gap-200">
           <div className="bg-background-neutral shadow-raised rounded-radius-xlarge aspect-[2/3] w-full overflow-hidden">
             {show.image?.original ? (
-              <picture className="block h-full w-full">
-                <source media="(min-width: 768px)" srcSet={show.image.original} />
-                {show.image?.medium && (
-                  <source media="(max-width: 767px)" srcSet={show.image.medium} />
-                )}
-                <img
-                  src={show.image.original}
-                  alt={show.name}
-                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                />
-              </picture>
+              <Image
+                src={show.image.original}
+                alt={show.name}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 280px"
+                className="object-cover transition-transform duration-500 hover:scale-105"
+              />
             ) : (
               <div className="bg-background-neutral-subtle flex h-full w-full items-center justify-center">
                 <span className="text-icon-subtle material-symbols-outlined text-6xl">image</span>

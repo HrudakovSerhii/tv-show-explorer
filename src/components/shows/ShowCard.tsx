@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { NAV_URLS } from '@/constants';
 
@@ -23,16 +24,15 @@ const ShowCard: React.FC<ShowCardProps> = ({ show, onToggleWatchlist, isInWatchl
       href={`${NAV_URLS.show}/${show.id}`}
     >
       <div className="bg-background-neutral shadow-raised rounded-radius-large relative aspect-[2/3] w-full overflow-hidden">
-        {hasImage ? (
-          <picture className="absolute inset-0">
-            {hasOriginal && <source media="(min-width: 768px)" srcSet={show.image!.original!} />}
-            {hasMedium && <source media="(max-width: 767px)" srcSet={show.image!.medium!} />}
-            <img
-              src={show.image?.original || show.image?.medium}
-              alt={show.name}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-          </picture>
+        {hasImage && show.image ? (
+          <Image
+            src={show.image.original || show.image.medium || ''}
+            alt={show.name}
+            fill
+            priority={false}
+            sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
+          />
         ) : (
           <div className="bg-background-neutral-subtle absolute inset-0 flex items-center justify-center">
             <span className="text-icon-subtle material-symbols-outlined text-6xl">image</span>
