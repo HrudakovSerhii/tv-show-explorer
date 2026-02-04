@@ -3,10 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { RatingControlSkeleton } from '@/components/shared/RatingControl';
+import BreadcrumbsNavigation from '@/components/shared/BreadcrumbsNavigation';
+import ShareButton from '@/components/shared/ShareButton';
 
 import FavoriteButton from '@/components/shows/FavoriteButton';
 import UserRatingButton from '@/components/shows/UserRatingButton';
-import ShareButton from '@/components/shared/ShareButton';
 import WatchlistButton from '@/components/shows/WatchlistButton';
 
 import { getEpisodeDetails } from '@/lib/api/tvmaze';
@@ -43,26 +44,20 @@ export async function EpisodeDetails({ params }: EpisodePageProps) {
     );
   }
 
+  const breadcrumbs = [
+    {
+      label: episode._links.show.name,
+      href: `${NAV_URLS.show}/${id}`,
+    },
+    {
+      label: `Season ${episode.season}`,
+      href: `${NAV_URLS.show}/${id}?season=${episode.season}`,
+    },
+  ];
+
   return (
-    <div className="animate-fade-in mx-auto flex w-full max-w-[1200px] flex-col">
-      <nav className="flex flex-wrap items-center gap-100 px-200 pb-300 text-sm">
-        <Link
-          href={NAV_URLS.home}
-          className="text-brand font-weight-medium flex items-center gap-50 text-sm hover:underline"
-        >
-          <span className="material-symbols-outlined">arrow_back</span>
-          <span className="truncate">Back to Home</span>
-        </Link>
-        <span className="text-text-subtlest font-weight-medium">&gt;</span>
-        <Link
-          href={`${NAV_URLS.show}/${id}?season=${episode.season}`}
-          className="text-brand font-weight-medium text-sm hover:underline"
-        >
-          {episode._links.show.name}
-          <span className="text-text-subtlest font-weight-medium px-100">&gt;</span>
-          Season {episode.season}
-        </Link>
-      </nav>
+    <div className="animate-fade-in mx-auto flex w-full flex-col">
+      <BreadcrumbsNavigation items={breadcrumbs} />
 
       <div className="grid grid-cols-1 gap-400 p-200 lg:grid-cols-12">
         <div className="flex flex-col gap-200 lg:col-span-5">
