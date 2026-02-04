@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { NAV_URLS } from '@/constants';
 
@@ -50,19 +51,14 @@ export default function EpisodeListCard({
     >
       <div className="bg-background-neutral-subtle rounded-radius-medium relative aspect-video w-full flex-shrink-0 overflow-hidden sm:w-48">
         {episode.image?.medium || episode.image?.original ? (
-          <picture className="absolute inset-0">
-            {episode.image.original && (
-              <source media="(min-width: 640px)" srcSet={episode.image.original} />
-            )}
-            {episode.image.medium && (
-              <source media="(max-width: 639px)" srcSet={episode.image.medium} />
-            )}
-            <img
-              src={episode.image.medium || episode.image.original}
-              alt={episode.name}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          </picture>
+          <Image
+            src={episode.image.medium || episode.image.original!}
+            alt={episode.name}
+            fill
+            priority={false}
+            sizes="(max-width: 640px) 100vw, 192px"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
             <span className="text-icon-subtle material-symbols-outlined text-4xl">image</span>
