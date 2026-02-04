@@ -19,13 +19,13 @@ export default function AppThemeSwitch() {
 
   return (
     <button
-      className="text-text hover:bg-background-neutral-subtle-hovered rounded-radius-large pt-100 transition-colors"
+      className="text-text hover:bg-background-neutral-subtle-hovered rounded-sm transition-colors"
       onClick={handleToggle}
       aria-label={ariaLabel}
       title={`Current: ${theme} mode`}
       suppressHydrationWarning
     >
-      <span className="material-symbols-outlined">{icon}</span>
+      <span className="material-symbols-outlined p-100">{icon}</span>
     </button>
   );
 }
