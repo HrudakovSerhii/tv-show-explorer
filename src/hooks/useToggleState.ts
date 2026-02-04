@@ -1,8 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 
-type UseToggleStateOptions<TResult> = {
+import { log } from '@/lib/utils/logger';
+
+type UseToggleStateOptions = {
   checkStatus: () => boolean | Promise<boolean>;
-  onToggle: () => TResult | Promise<TResult>;
+  onToggle: () => boolean | Promise<boolean>;
   dependencies?: unknown[];
 };
 
@@ -12,11 +14,11 @@ type UseToggleStateReturn = {
   handleToggle: () => void;
 };
 
-export function useToggleState<TResult>({
+export function useToggleState({
   checkStatus,
   onToggle,
   dependencies = [],
-}: UseToggleStateOptions<TResult>): UseToggleStateReturn {
+}: UseToggleStateOptions): UseToggleStateReturn {
   const [isActive, setIsActive] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,10 +26,9 @@ export function useToggleState<TResult>({
     async function loadInitialStatus() {
       try {
         const status = await checkStatus();
-
         setIsActive(status);
       } catch (error) {
-        console.error('Error checking status:', error);
+        log.error('Error checking status:', error);
       }
     }
 
@@ -37,31 +38,12 @@ export function useToggleState<TResult>({
 
   const handleToggle = useCallback(async () => {
     try {
-      const result = await onToggle();
-
-      // Handle boolean return (e.g., from localStorage toggleWatchlist)
-      if (typeof result === 'boolean') {
-        setIsActive(result);
-      }
-
-      // Handle FavoriteActionResult object (e.g., from server actions)
-      else if (result && typeof result === 'object' && 'isFavorite' in result) {
-        // This ugly conversion is example of how benefits of combining sync/async under one API might affect code quality and introduce bugs
-        const response = result as unknown as { success: boolean; isFavorite?: boolean };
-
-        if (response.success && response.isFavorite !== undefined) {
-          setIsActive(response.isFavorite);
-        }
-      }
+      setIsActive(await onToggle());
     } catch (error) {
-      console.error('Error toggling state:', error);
+      log.error('Error toggling state:', error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onToggle]);
 
-  return {
-    isActive,
-    isLoading,
-    handleToggle,
-  };
+  return { isActive, isLoading, handleToggle };
 }

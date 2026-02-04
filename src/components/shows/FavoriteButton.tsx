@@ -5,7 +5,7 @@ import { useTransition } from 'react';
 import { toggleFavorite, isInFavorite } from '@/app/actions/favorites';
 import { useToggleState } from '@/hooks/useToggleState';
 
-import type { FavoriteType, FavoriteMetadata, FavoriteActionResult } from '@/types/favorites';
+import type { FavoriteType, FavoriteMetadata } from '@/types/favorites';
 
 type FavoriteButtonProps = {
   id: string | number;
@@ -26,9 +26,12 @@ export default function FavoriteButton({
     isActive: isFavorite,
     isLoading,
     handleToggle: baseHandleToggle,
-  } = useToggleState<FavoriteActionResult>({
+  } = useToggleState({
     checkStatus: () => isInFavorite(id, type),
-    onToggle: () => toggleFavorite(id, type, metadata, rating),
+    onToggle: async () => {
+      const result = await toggleFavorite(id, type, metadata, rating);
+      return result.isFavorite ?? false;
+    },
     dependencies: [id, type],
   });
 
