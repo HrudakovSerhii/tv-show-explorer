@@ -20,9 +20,6 @@ const eslintConfig = defineConfig([
     plugins: {
       '@atlaskit/design-system': atlaskitPlugin,
     },
-    rules: {
-      ...atlaskitPlugin.configs.recommended.rules,
-    },
   },
   {
     files: ['**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}', 'vitest.setup.tsx', 'src/test-utils.tsx'],
