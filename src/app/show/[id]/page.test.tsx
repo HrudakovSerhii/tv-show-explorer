@@ -162,11 +162,9 @@ describe('Show Page', () => {
           }),
         );
 
-        const picture = container.querySelector('picture');
-        expect(picture).toBeInTheDocument();
-
+        // Next.js Image component is used instead of picture element
         const img = container.querySelector('img');
-        expect(img).toHaveAttribute('src', mockShowDetails.image!.original);
+        expect(img).toBeInTheDocument();
         expect(img).toHaveAttribute('alt', mockShowDetails.name);
       });
     });

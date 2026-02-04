@@ -6,6 +6,7 @@ import {
   mockEpisodeDetails,
   mockShows,
 } from './__mocks__/tvmaze.mock';
+import * as logger from '@/lib/utils/logger';
 
 // Mock fetch globally
 global.fetch = vi.fn();
@@ -59,7 +60,7 @@ describe('TVMaze API Client', () => {
     });
 
     it('should return empty array on HTTP error', async () => {
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleErrorSpy = vi.spyOn(logger.log, 'error').mockImplementation(() => {});
 
       (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
         ok: false,
@@ -77,7 +78,7 @@ describe('TVMaze API Client', () => {
     });
 
     it('should return empty array on network error', async () => {
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleErrorSpy = vi.spyOn(logger.log, 'error').mockImplementation(() => {});
 
       (global.fetch as ReturnType<typeof vi.fn>).mockRejectedValueOnce(
         new Error('Network error')
@@ -94,7 +95,7 @@ describe('TVMaze API Client', () => {
     });
 
     it('should handle malformed JSON response', async () => {
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleErrorSpy = vi.spyOn(logger.log, 'error').mockImplementation(() => {});
 
       (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
         ok: true,
@@ -156,7 +157,7 @@ describe('TVMaze API Client', () => {
     });
 
     it('should return null on other HTTP errors', async () => {
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleErrorSpy = vi.spyOn(logger.log, 'error').mockImplementation(() => {});
 
       (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
         ok: false,
@@ -174,7 +175,7 @@ describe('TVMaze API Client', () => {
     });
 
     it('should return null on network error', async () => {
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleErrorSpy = vi.spyOn(logger.log, 'error').mockImplementation(() => {});
 
       (global.fetch as ReturnType<typeof vi.fn>).mockRejectedValueOnce(
         new Error('Network error')
@@ -191,7 +192,7 @@ describe('TVMaze API Client', () => {
     });
 
     it('should handle malformed JSON response', async () => {
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleErrorSpy = vi.spyOn(logger.log, 'error').mockImplementation(() => {});
 
       (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
         ok: true,
@@ -250,7 +251,7 @@ describe('TVMaze API Client', () => {
     });
 
     it('should return null on other HTTP errors', async () => {
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleErrorSpy = vi.spyOn(logger.log, 'error').mockImplementation(() => {});
 
       (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
         ok: false,
@@ -268,7 +269,7 @@ describe('TVMaze API Client', () => {
     });
 
     it('should return null on network error', async () => {
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleErrorSpy = vi.spyOn(logger.log, 'error').mockImplementation(() => {});
 
       (global.fetch as ReturnType<typeof vi.fn>).mockRejectedValueOnce(
         new Error('Network error')
@@ -285,7 +286,7 @@ describe('TVMaze API Client', () => {
     });
 
     it('should handle malformed JSON response', async () => {
-      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleErrorSpy = vi.spyOn(logger.log, 'error').mockImplementation(() => {});
 
       (global.fetch as ReturnType<typeof vi.fn>).mockResolvedValueOnce({
         ok: true,
