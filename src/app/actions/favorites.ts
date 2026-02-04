@@ -1,8 +1,11 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { headers } from 'next/headers';
 
 import { readFavoritesFile, writeFavoritesFile } from '@/lib/utils/fileStorage';
+import { isRateLimited } from '@/lib/utils/rateLimiter';
+import { log } from '@/lib/utils/logger';
 
 import type {
   FavoriteType,
@@ -21,6 +24,12 @@ export async function toggleFavorite(
   metadata?: FavoriteMetadata,
   rating?: number,
 ): Promise<FavoriteActionResult> {
+  const headersList = await headers();
+  const ip = headersList.get('x-forwarded-for')?.split(',')[0] ?? 'anonymous';
+  if (isRateLimited(ip)) {
+    return { success: false, error: 'Rate limit exceeded. Please try again later.' };
+  }
+
   try {
     const prefixedId = createPrefixedId(id, type);
     const data = await readFavoritesFile();
@@ -49,7 +58,7 @@ export async function toggleFavorite(
       return { success: true, isFavorite: true };
     }
   } catch (error) {
-    console.error('Error toggling favorite:', error);
+    log.error('Error toggling favorite:', error);
 
     return {
       success: false,
@@ -65,7 +74,7 @@ export async function isInFavorite(id: string | number, type: FavoriteType): Pro
 
     return data.favorites.some((fav) => fav.id === prefixedId);
   } catch (error) {
-    console.error('Error checking favorite status:', error);
+    log.error('Error checking favorite status:', error);
 
     return false;
   }
@@ -77,6 +86,12 @@ export async function updateFavoriteRating(
   rating: number,
   metadata?: FavoriteMetadata,
 ): Promise<FavoriteActionResult> {
+  const headersList = await headers();
+  const ip = headersList.get('x-forwarded-for')?.split(',')[0] ?? 'anonymous';
+  if (isRateLimited(ip)) {
+    return { success: false, error: 'Rate limit exceeded. Please try again later.' };
+  }
+
   try {
     const prefixedId = createPrefixedId(id, type);
     const data = await readFavoritesFile();
@@ -106,7 +121,7 @@ export async function updateFavoriteRating(
 
     return { success: true };
   } catch (error) {
-    console.error('Error updating favorite rating:', error);
+    log.error('Error updating favorite rating:', error);
 
     return {
       success: false,
@@ -127,7 +142,7 @@ export async function getFavoriteRating(
 
     return favorite?.rating ?? null;
   } catch (error) {
-    console.error('Error getting favorite rating:', error);
+    log.error('Error getting favorite rating:', error);
 
     return null;
   }
