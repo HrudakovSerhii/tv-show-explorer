@@ -24,9 +24,9 @@ const ShowCard: React.FC<ShowCardProps> = ({ show, onToggleWatchlist, isInWatchl
       href={`${NAV_URLS.show}/${show.id}`}
     >
       <div className="bg-background-neutral shadow-raised rounded-radius-large relative aspect-[2/3] w-full overflow-hidden">
-        {hasImage ? (
+        {hasImage && show.image ? (
           <Image
-            src={show.image?.original || show.image?.medium!}
+            src={show.image.original || show.image.medium || ''}
             alt={show.name}
             fill
             priority={false}

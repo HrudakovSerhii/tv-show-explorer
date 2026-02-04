@@ -42,7 +42,6 @@ export function useToggleState({
     } catch (error) {
       log.error('Error toggling state:', error);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onToggle]);
 
   return { isActive, isLoading, handleToggle };
